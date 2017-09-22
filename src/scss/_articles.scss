@@ -1,0 +1,257 @@
+// **************************************************
+// ARTICLES
+// **************************************************
+//
+// -------------------
+// Header entry-header
+// Article hentry
+// Article list
+// Metadata
+// -------------------
+
+
+// Header .entry-header
+
+header.entry-header {
+  margin-bottom: 2em;
+
+  figure {
+    margin-right: 1.2em;
+    margin-bottom: 1.2em;
+  }
+
+  @include box-shadow(none);
+}
+
+header.entry-header {
+  position: relative;
+  border-bottom: 1px solid $gray-lighter;
+}
+
+.entry-label {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.entry-title {
+  display: inline;
+  @media only screen and (max-width: $screen-xxs-max) {
+    width: 100%;
+    float: none;
+    clear: both;
+  }
+}
+
+.entry-description {
+  color: darken($gray-lighter, 25%);
+  margin-right: 120px;
+  margin-bottom: 3px;
+  @media only screen and (max-width: $screen-xs-max) {
+    clear: both;
+  }
+
+  p.author, p.time {
+    float: left;
+    display: block;
+  }
+
+  p.author {
+    margin-right: 0.3em;
+    margin-bottom: 0;
+    .fn {
+      color: darken($gray-lighter, 35%);
+    }
+  }
+
+  .entry-social {
+    font-size: 20px;
+    display: block;
+    position: absolute;
+    margin-left: 20px;
+    right: 0;
+    bottom: 0;
+
+    ul {
+      margin-bottom: 0;
+      li {
+        display: inline-block;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        a {
+          color: darken($gray-lighter, 25%);
+
+          &:hover {
+            text-decoration: none;
+            color: $iso-darkblue;
+            -webkit-transition: color .5s;
+            transition: color .5s;
+          }
+          &:focus {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.entry-block {
+  display: inline-block;
+}
+
+.entry-summary,
+.entry-title,
+.entry-name,
+.entry-comment {
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.media {
+  margin-bottom: 1.2em;
+}
+.hentry {
+  margin-bottom: 10px;
+}
+
+// Article hentry
+article.hentry {
+  header {
+    figure {
+      img.entry-image {
+        width: 150px;
+        height: auto;
+
+        @media only screen and (max-width: $screen-xs-max) {
+          width: 100px;
+        }
+
+        @media only screen and (max-width: $screen-xxs-max) {
+          float: none;
+        }
+      }
+    }
+  }
+  footer {
+    padding-top: 2em;
+  }
+}
+
+// Article list
+.article-list,
+.media-list {
+  .hentry,
+  .media {
+    figure {
+      margin-right: 1.2em;
+    }
+
+    img.entry-image {
+      width: 100px;
+      height: auto;
+
+      @media only screen and (max-width: $screen-xs-max) {
+        width: 75px;
+      }
+    }
+
+    .entry-container {
+      overflow: hidden;
+      zoom: 1;
+      margin-right: 0;
+      @media only screen and (max-width: $screen-xxs-max) {
+        clear: both;
+      }
+
+      header {
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+    }
+
+    footer {
+      margin-bottom: 0;
+      padding-top: 0;
+    }
+  }
+
+  article {
+    padding-bottom: 10px;
+    margin-bottom: 1.2em;
+    border-bottom: 1px solid #eee;
+  }
+
+  article.hentry.highlight {
+    img.entry-image {
+      width: 150px;
+    }
+
+    @media only screen and (max-width: $screen-xs-max) {
+      img.entry-image {
+        width: 100px;
+      }
+    }
+  }
+}
+
+
+// Metadata
+
+.metadata-container {
+  padding: 0 0 10px 0;
+  color: darken($gray-lighter, 20%);
+  width: 100%;
+
+  .entry-keywords {
+    border-top: 1px dotted $gray-lighter;
+    float: left;
+    margin-top: .3em;
+    padding-top: .3em;
+  }
+
+  .entry-keywords.maxwidth-100pct + .entry-keywords.maxwidth-100pct {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  @media only screen and (max-width: $screen-xs-max) {
+    .entry-keywords.maxwidth-50pct + .entry-keywords.maxwidth-50pct {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  dl.dl-inline {
+    margin-bottom: 0;
+    padding-right: 2em;
+  }
+
+  // aligns on the right
+  &.metadata-right {
+    .entry-keywords.maxwidth-50pct,
+    .entry-hashtags.maxwidth-50pct,
+    .entry-keywords.maxwidth-100pct,
+    .entry-hashtags.maxwidth-100pct,
+    .entry-hashtags {
+      float: right;
+    }
+
+    dl.dl-inline {
+      padding-left: 2em;
+      padding-right: 0;
+    }
+  }
+
+  // ss-icons are not well aligned
+  .ss-icon {
+    vertical-align: middle;
+  }
+}
+
+
+

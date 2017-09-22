@@ -1,0 +1,79 @@
+// **************************************************
+// BUTTONS
+// **************************************************
+
+@include btn-hover-focus-active("default", #fff, #d9d9d9);
+@include btn-hover-focus-active("primary", $brand-primary, $brand-primary);
+@include btn-hover-focus-active("success", $brand-success, $brand-success);
+@include btn-hover-focus-active("info", $brand-info, $brand-info);
+@include btn-hover-focus-active("warning", $brand-warning, $brand-warning);
+@include btn-hover-focus-active("danger", $brand-danger, $brand-danger);
+
+
+/// Basic button description
+/// @name .btn
+/// @author Chris
+/// @example
+///   <button class="btn btn-primary">Click me</button>
+.btn {
+  padding: 6px 12px 4px;
+  //margin-bottom: 10px;
+  a:hover {
+    text-decoration: none;
+  }
+  & + .dropdown-menu {
+    margin-top: -10px;
+    &.dropdown-sm {
+      font-size: $font-size-small;
+    }
+  }
+}
+
+.btn-lg {
+  padding: 9px 12px 6px;
+}
+
+.btn.btn-sm {
+  padding: 4px 12px 2px;
+}
+
+.btn.btn-xs {
+  padding: 3px 12px 1px;
+}
+
+// for button in Modal
+button.close {
+  position: relative;
+  z-index: 99;
+}
+
+.btn.pull-right+.btn.pull-right {
+  margin-right: 5px;
+}
+
+// buttons inside headings
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  > .btn {
+    margin-left: 0.5em;
+  }
+}
+h1, .h1 {
+  > .btn {
+    margin-bottom: 7px;
+  }
+}
+h2, .h2 {
+  > .btn {
+    margin-bottom: 5px;
+  }
+}
+h3, .h3, h4, .h4 {
+  > .btn {
+    margin-bottom: 4px;
+  }
+}
+h5, .h5, h6, .h6 {
+  > .btn {
+    margin-bottom: 2px;
+  }
+}

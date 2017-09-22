@@ -1,0 +1,661 @@
+// **************************************************
+// TYPOGRAPHY
+// **************************************************
+// 
+// --------------
+// Headers
+// General typo
+// Fonts
+// Logo
+// Bloquotes
+// Glyphicons
+// Badges
+// Statistics
+// More styles
+// responsive display
+// --------------
+
+body {
+  background-color: #f1f1f1;
+}
+
+// --------------
+// Headers
+// --------------
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+  letter-spacing: -1px;
+  a:hover,
+  a:focus {
+    text-decoration: none;
+    border-bottom: 1px solid $link-color;
+    &.ss-icon,
+    .ss-icon {
+      border-bottom: none;
+    }
+  }
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6  {
+  margin-top: 0;
+  font-weight: 500;
+  small {
+    font-weight: inherit;
+    color: lighten($gray-light, 10%);
+  }
+}
+
+// Because MetaWebPro light is not visible when too small
+h5, .h5, h6, .h6  {
+  font-weight: bold;
+}
+
+h4, .h4, h5, .h5, h6, .h6  {
+  margin-bottom: 5px;
+}
+
+// Adds margin on Headings when after p, ul, table, .hentry
+p + h1, p + h2, p + h3, p + h4, p + h5, p + h6,
+ul + h1, ul + h2, ul + h3, ul + h4, ul + h5, ul + h6,
+table + h1, table + h2, table + h3, table + h4, table + h5, table + h6,
+.hentry + h1, .hentry + h2, .hentry + h3, .hentry + h4, .hentry + h5, .hentry + h6,
+.media + h1, .media + h2, .media + h3, .media + h4, .media + h5, .media + h6 {
+  margin-top: 1em;
+}
+
+h1, .h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+h2, .h2 {
+  font-size: 34px;
+}
+
+h3, .h3 {
+  font-size: 28px;
+}
+
+h4, .h4 {
+  font-size: 24px;
+}
+
+h5, .h5 {
+  font-size: 20px;
+}
+
+h6, .h6 {
+  font-size: 18px;
+}
+
+.heading-condensed {
+  margin-bottom: 20px;
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    margin-bottom: 0;
+  }
+}
+
+// --------------
+// General typo
+// --------------
+
+.text-small {
+  font-size: $font-size-small;
+}
+
+.text-xs {
+  font-size: $font-size-xs;
+}
+
+.text-normal {
+  font-weight: normal;
+}
+
+select {
+  cursor: pointer;
+}
+
+.text-light {
+  font-weight: 500;
+}
+
+// truncate the text and adds ellipsis
+.text-overflow-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+}
+
+.smaller {
+  font-size: 75%;
+}
+
+.smallest {
+  font-size: 65%;
+}
+
+.maxwidth-100pct {
+  max-width: 100%;
+}
+
+.maxwidth-50pct {
+  max-width: 50%;
+
+  // on small screens, it takes the whole width
+  @media only screen and (max-width: $screen-xs-max) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.label {
+  padding: .25em .4em .15em;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+hr.fit-to-row {
+  margin-left: - $grid-gutter-width;
+  margin-right: - $grid-gutter-width;
+  margin-top: $grid-gutter-width;
+  margin-bottom: $grid-gutter-width;
+}
+
+.page-header {
+  // override bootstrap margin-top
+  margin-top: 0;
+}
+
+.error-code {
+  font-size: 2000%;
+  font-weight: bold;
+  color: $gray-lighter;
+  line-height: 35%;
+  margin-top: 10%;
+  @media only screen and (max-width: $screen-xs-max) {
+    font-size: 1000%;
+  }
+}
+
+// Margin & Padding forcing
+.no-margin {
+  margin: 0 !important;
+}
+.no-padding {
+  padding: 0 !important;
+}
+.no-top-margin {
+  margin-top: 0 !important;
+}
+.no-bottom-margin {
+  margin-bottom: 0 !important;
+}
+.no-left-margin {
+  margin-left: 0 !important;
+}
+.no-right-margin {
+  margin-right: 0 !important;
+}
+.no-top-padding {
+  padding-top: 0 !important;
+}
+.no-bottom-padding {
+  padding-bottom: 0 !important;
+}
+.no-left-padding {
+  padding-left: 0 !important;
+}
+.no-right-padding {
+  padding-right: 0 !important;
+}
+
+// --------------
+// Fonts
+// --------------
+
+.entry-social {
+  .ss-icon {
+    font-size: 32px;
+    margin-right: 5px;
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.popover {
+  font-family: 'MetaWebPro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  .popover-title {
+    font-weight: bold;
+  }
+}
+
+
+// --------------
+// ISO Logo
+// --------------
+
+.logo {
+  z-index: 1;
+  display: block;
+  width: #{$logo-width +6}px;
+  @include img-retina("assets/img/iso/iso-logo.png", "assets/img/iso/iso-logo-hd.png", #{$logo-width}px, auto);
+  background-repeat: no-repeat;
+  @include transition(all 0.1s ease);
+}
+
+.isologo-txt {
+  float: left;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  background-image: url("assets/img/iso/iso-logo.png");
+  background-position: 0 1px;
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  background-color: $iso-red;
+}
+
+// --------------
+// Bloquotes
+// --------------
+
+blockquote {
+  padding-right: 60px;
+  margin-right: 30px;
+  border-left: 5px solid darken($gray-lighter, 2%);
+  position: relative;
+  clear: both;
+
+  @media print {
+    border: none;
+  }
+
+  &:before {
+    content: "\201E" !important;
+    font-size: 120px;
+    color: darken($gray-lighter, 2%);
+    float: right;
+    top: -16px;
+    right: 0;
+    position: absolute;
+    line-height: 1px;
+  }
+
+  @media only screen and (max-width: $screen-xs-max) {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100% !important;
+  }
+}
+
+// image inside blockquote should have max100px width
+blockquote figure {
+  &.align-left {
+    margin-right: 1em;
+  }
+  &.align-right {
+    margin-left: 1em;
+  }
+}
+
+.row-gray blockquote,
+.alert-gray blockquote {
+  border-left: 5px solid darken($gray-lighter, 6%);
+  &:before {
+    color: darken($gray-lighter, 6%);
+  }
+}
+
+blockquote.blockquote-reverse {
+  padding-left: 60px;
+  padding-right: 20px;
+
+  &:before {
+    right: auto;
+    left: 0;
+  }
+}
+
+// Blockquotes when text is centered
+.text-center {
+  blockquote {
+    padding-right: 40px;
+    padding-left: 40px;
+    border-left: none;
+    margin-right: 0;
+
+    &:before {
+      right: -10px;
+      font-size: 100px;
+    }
+    &:after {
+      content: "\201E";
+      -ms-transform: rotate(180deg); /* IE 9 */
+      -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+      transform: rotate(180deg);
+      font-size: 100px;
+      color: darken($gray-lighter, 2%);
+      float: right;
+      bottom: -16px;
+      left: -10px;
+      position: absolute;
+      line-height: 1px;
+    }
+  }
+}
+
+// --------------
+// Glyphicons: Links, span, p or headings with class glyphicon-
+// --------------
+
+a[class^='glyphicon-']:before,
+a[class*=' glyphicon-']:before,
+span[class^='glyphicon-']:before,
+span[class*=' glyphicon-']:before,
+p[class^='glyphicon-']:before,
+p[class*=' glyphicon-']:before,
+h1[class^='glyphicon-']:before,
+h1[class*=' glyphicon-']:before,
+h2[class^='glyphicon-']:before,
+h2[class*=' glyphicon-']:before,
+h3[class^='glyphicon-']:before,
+h3[class*=' glyphicon-']:before,
+h4[class^='glyphicon-']:before,
+h4[class*=' glyphicon-']:before,
+h5[class^='glyphicon-']:before,
+h5[class*=' glyphicon-']:before,
+h6[class^='glyphicon-']:before,
+h6[class*=' glyphicon-']:before {
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  margin-right: 0.4em;
+  font-size: 0.75em;
+  vertical-align: baseline;
+}
+
+.shopping-cart-badge {
+  padding-left: 20px;
+  .glyphicon-shopping-cart {
+    &:before {
+      position: absolute;
+      top: -12px;
+      left: -20px;
+      font-size: 16px;
+    }
+  }
+}
+
+
+// --------------
+// Badges
+// --------------
+
+.badge {
+  &.badge-primary {
+    background-color: $btn-primary-bg;
+  }
+  &.badge-warning {
+    background-color: $btn-warning-bg;
+  }
+  &.badge-success {
+    background-color: $btn-success-bg;
+  }
+  &.badge-danger {
+    background-color: $btn-danger-bg;
+  }
+}
+
+
+// --------------
+// Statistics
+// --------------
+
+.statistic {
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  .number {
+    font-size: 100px;
+    font-weight: 500;
+    letter-spacing: -10px;
+    line-height: 80px;
+    margin-left: -8px;
+    margin-right: 5px;
+
+    &.small {
+      font-size: 75px;
+    }
+
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+
+      text-decoration: none;
+    }
+    a:hover {
+      font-weight: normal;
+    }
+  }
+
+  .unit {
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    line-height: 1em;
+    margin-bottom: 7px;
+    display: inline-block;
+  }
+
+  .description {
+    border-top: 1px solid $gray-lighter;
+    color: $gray-light;
+    padding-top: 7px;
+  }
+}
+
+// No top top/bottom padding when first/last item within a box
+.well > .statistic:first-child,
+.highlight-box > .statistic:first-child {
+  padding-top: 0;
+}
+
+.well > .statistic:last-child,
+.highlight-box > .statistic:last-child {
+  padding-bottom: 0;
+}
+
+// -------------------
+// Responsive display
+// -------------------
+
+.block {
+  display: block !important;
+}
+
+.inline {
+  display: inline !important;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
+
+@media (max-width: $screen-xxs-max) {
+  .block-xxs {
+    display: block !important;
+  }
+  .inline-xxs {
+    display: inline !important;
+  }
+  .inline-block-xxs {
+    display: inline-block !important;
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .block-xs {
+    display: block !important;
+  }
+  .inline-xs {
+    display: inline !important;
+  }
+  .inline-block-xs {
+    display: inline-block !important;
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  .block-sm {
+    display: block !important;
+  }
+  .inline-sm {
+    display: inline !important;
+  }
+  .inline-block-sm {
+    display: inline-block !important;
+  }
+}
+
+@media (max-width: $screen-md-max) {
+  .block-md {
+    display: block !important;
+  }
+  .inline-md {
+    display: inline !important;
+  }
+  .inline-block-md {
+    display: inline-block !important;
+  }
+}
+@media (min-width: $screen-lg-min) {
+  .block-lg {
+    display: block !important;
+  }
+  .inline-lg {
+    display: inline !important;
+  }
+  .inline-block-lg {
+    display: inline-block !important;
+  }
+}
+
+
+// --------------
+// More styles
+// --------------
+
+// Contextual colors
+.text-muted {
+  color: lighten($text-color, 40%);
+}
+
+.text-help {
+  color: lighten($text-color, 20%);
+}
+
+.text-primary {
+  color: $brand-primary;
+}
+
+.text-success {
+  color: $brand-success;
+  a {
+    color: darken($brand-success, 15%);
+  }
+}
+
+.text-info {
+  color: $brand-info;
+}
+
+.text-warning {
+  color: $brand-warning;
+  a {
+    color: darken($brand-warning, 20%);
+  }
+}
+
+.text-danger {
+  color: $brand-danger;
+  a {
+    color: darken($brand-danger, 20%);
+  }
+}
+
+a.text-muted, .text-muted a {
+  color: lighten(desaturate($link-color, 50%), 30%);
+}
+
+.bg-primary a {
+  color: lighten($link-color, 20%);
+}
+
+// Badges
+.badge {
+  font-weight: normal;
+}
+
+// Price
+.price {
+  font-size: 42px;
+  font-weight: 500;
+  vertical-align: middle;
+  .currency {
+    font-size: 26px;
+    color: $gray-light;
+    margin-right: 3px;
+  }
+}
+
+// Caret
+.caret {
+  border: none;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+  width: 0.8rem;
+  //height: 1em;
+  line-height: 0;
+}
+
+.caret:after {
+  content: '>\a0';
+}
+
+// section head title
+.section-head {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: lighten($gray-light, 20%);
+}
+
+.text-brand-description {
+  color: #BBB;
+  padding: 0 15px 15px 100px;
+  z-index: 5;
+  font-size: 22px;
+  line-height: 22px;
+  width: 70%;
+  position: relative;
+  top: -40px;
+
+  @media only screen and (max-width: $screen-sm-max) {
+    width: 100%;
+  }
+
+  @media only screen and (max-width: $screen-xxs-max) {
+    padding-left: 15px;
+  }
+}
+
+
+
+
+

@@ -1,0 +1,250 @@
+// **************************************************
+// COLORED ROWS
+// **************************************************
+
+
+.row {
+  // Row position: top, middle or bottom
+  &.row-top,
+  &.row-bottom,
+  &.row-middle,
+  &.row-topline {
+    padding-top: $grid-gutter-width;
+    padding-right: $grid-gutter-width/2;
+    padding-bottom: $grid-gutter-width;
+    padding-left: $grid-gutter-width/2;
+  }
+
+  &.row-top {
+    margin-top: -$grid-gutter-width;
+    margin-right: -$grid-gutter-width;
+    margin-bottom: $grid-gutter-width;
+    margin-left: -$grid-gutter-width;
+
+    @media only screen and (max-width: $screen-xs-max) {
+      margin-top: -$grid-gutter-width;
+    }
+    @media only screen and (max-width: $screen-sm-max) {
+      margin-bottom: $grid-gutter-width/2;
+    }
+  }
+
+  &.row-middle {
+    margin-top: $grid-gutter-width;
+    margin-right: -$grid-gutter-width;
+    margin-bottom: $grid-gutter-width;
+    margin-left: -$grid-gutter-width;
+  }
+
+  &.row-bottom {
+    margin-top: $grid-gutter-width;
+    margin-right: -$grid-gutter-width;
+    margin-bottom: -$grid-gutter-width;
+    margin-left: -$grid-gutter-width;
+
+    @media only screen and (max-width: $screen-xs-max) {
+      margin-bottom: -$grid-gutter-width;
+    }
+    @media only screen and (max-width: $screen-sm-max) {
+      margin-top: $grid-gutter-width/2;
+    }
+  }
+
+  &.row-topline {
+    border-top: 1px solid #eee;
+    margin-right: -$grid-gutter-width;
+    margin-left: -$grid-gutter-width;
+    margin-top: $grid-gutter-width/2;
+  }
+
+  &.row-no-padding {
+    padding: 0;
+
+    // full width image when directly inside a .row-no-padding
+    & > img {
+      display: block;
+      width: 100% \9;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .navbar-collapse {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .navbar-right {
+      margin-right: 0;
+    }
+  }
+
+  &.row-top + .row.row-middle,
+  &.row-middle + .row-middle,
+  &.row-top + .row.row-top {
+    margin-top: -$grid-gutter-width;
+  }
+
+  &.row-primary,
+  &.row-success,
+  &.row-info,
+  &.row-warning,
+  &.row-danger {
+    color: #FFF;
+
+    a {
+      color: #f6f6f6;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #FFF;
+    }
+  }
+}
+
+
+// ---------
+// row-color
+// ---------
+
+@mixin row-color($type, $row-color) {
+  .row.row-#{$type} {
+    background-color: $row-color;
+
+    &.row-top {
+      border-bottom: 1px solid darken($row-color, 5%);
+    }
+
+    &.row-middle {
+      border-top: 1px solid darken($row-color, 5%);
+      border-bottom: 1px solid darken($row-color, 5%);
+    }
+
+    &.row-bottom {
+      border-top: 1px solid darken($row-color, 5%);
+    }
+
+    .btn-#{$type} {
+      border-color: darken($row-color, 2%);
+    }
+
+    .highlight-box {
+      border: none;
+    }
+  }
+}
+
+@include row-color("lighter", lighten($gray-lighter, 5%));
+@include row-color("light", lighten($gray-lighter, 4%));
+@include row-color("gray", $gray-lighter);
+@include row-color("white", #FFF);
+@include row-color("primary", $brand-primary);
+@include row-color("success", $brand-success);
+@include row-color("info", $brand-info);
+@include row-color("warning", $brand-warning);
+@include row-color("danger", $brand-danger);
+
+
+/* Highlighted section on top of a row */
+.row > .top-row-section {
+  margin-top: -$grid-gutter-width;
+  margin-right: -$grid-gutter-width/2;
+  margin-bottom: $grid-gutter-width/2;
+  margin-left: -$grid-gutter-width/2;
+  padding: 10px;
+  background-color: #f3f3f3;
+  position: relative;
+  border-bottom: 1px solid $gray-lighter;
+  z-index: 1;
+
+  &.input-bar {
+    h4 {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+
+// **************************************************
+// COLORED COLUMNS
+// **************************************************
+
+.col-left {
+  margin-left: -$grid-gutter-width/2;
+  padding-left: $grid-gutter-width;
+  margin-right: $grid-gutter-width/2;
+  padding-right: $grid-gutter-width;
+  margin-top: -$grid-gutter-width;
+  padding-top: $grid-gutter-width;
+  @media only screen and (max-width: $screen-sm-max) {
+    margin-right: -$grid-gutter-width/2;
+  }
+}
+
+.col-right {
+  margin-right: -$grid-gutter-width/2;
+  padding-right: $grid-gutter-width;
+  margin-left: $grid-gutter-width/2;
+  padding-left: $grid-gutter-width;
+  margin-top: -$grid-gutter-width;
+  padding-top: $grid-gutter-width;
+  @media only screen and (max-width: $screen-sm-max) {
+    margin-left: -$grid-gutter-width/2;
+  }
+}
+
+
+// ---------
+// col-color
+// ---------
+
+@mixin col-color($type, $col-color) {
+  .col-#{$type} {
+    background-color: $col-color;
+
+    &.col-left {
+      border-right: 1px solid darken($col-color, 5%);
+
+      @media only screen and (max-width: $screen-sm-max) {
+        border-right: none;
+        margin-bottom: -#{$grid-gutter-width + 2};
+      }
+    }
+
+    &.col-right {
+      border-left: 1px solid darken($col-color, 5%);
+
+      @media only screen and (max-width: $screen-sm-max) {
+        border-left: none;
+        margin-bottom: -$grid-gutter-width;
+      }
+    }
+
+    &.col-left,
+    &.col-right {
+      @media only screen and (max-width: $screen-sm-max) {
+        padding-bottom: $grid-gutter-width;
+      }
+
+      &::after {
+        @include gradient-vertical($col-color, #FFFFFF, 0%, 100%);
+        height: 100px;
+        content: " ";
+        min-width: 100%;
+        display: block;
+        margin-right: -$grid-gutter-width;
+        margin-left: -$grid-gutter-width;
+        border: none;
+        @media only screen and (max-width: $screen-sm-max) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@include col-color("lighter", lighten($gray-lighter, 5%));
+@include col-color("light", lighten($gray-lighter, 4%));
+@include col-color("default", $gray-lighter);
+@include col-color("white", #FFF);

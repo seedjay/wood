@@ -1,0 +1,66 @@
+// **************************************************
+// ISO VARIABLES
+// **************************************************
+
+$brand-primary: #006bb7;
+$brand-success: #00b84c;
+$brand-info: #63a9db;
+$brand-warning: #e6a150;
+$brand-danger: #D12E2E;
+
+$link-color: $brand-primary;
+$link-hover-color: darken($link-color, 5%);
+
+$icon-font-path: "assets/fonts/bootstrap/";
+
+$state-success-text: darken($brand-success, 10%);
+$state-success-bg: desaturate(lighten($brand-success, 55%), 50%);
+$state-success-border: darken(adjust-hue($state-success-bg, -10), 5%);
+
+$state-info-text: darken($brand-info, 20%);
+$state-info-bg: desaturate(lighten($brand-info, 30%), 30%);
+$state-info-border: darken(adjust-hue($state-info-bg, -10), 7%);
+
+$state-warning-text: darken($brand-warning, 25%);
+//$state-warning-bg: desaturate(lighten($brand-warning, 33%), 20%);
+$state-warning-border: darken(adjust-hue($state-warning-bg, -10), 5%);
+
+$state-danger-text: darken($brand-danger, 5%);
+$state-danger-bg: desaturate(lighten($brand-danger, 40%), 20%);
+$state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%);
+
+/**
+ * ISO Variables
+ */
+// Font sizes
+$text-brand-fontsize : 84;
+$font-size-base: 16px;
+$font-size-large: $font-size-base * 1.25; // ~20px
+$font-size-small: $font-size-base * 0.85; // ~13.6px
+$font-size-xs: $font-size-base * 0.75; // ~12px
+
+// Colors
+$iso-darkblue: #013568 !default;
+$iso-lightblue: #3f688f !default;
+$iso-red: #e3000f !default;
+$iso-blue: #006bb6 !default;
+$iso-nav-colorL1: #cfcfcf !default;
+$iso-nav-colorL2: lighten($iso-nav-colorL1, 3%) !default;
+$iso-nav-colorL3: lighten($iso-nav-colorL2, 5%) !default;
+$iso-nav-colorL4: lighten($iso-nav-colorL3, 5%) !default;
+
+// Responsive breakpoints
+$screen-xxs-max: ($screen-xs-min - 1) !default; // corresponds to 480px
+
+// Banner sizes
+$logo-width: 84;
+$logo-height-1line: 88;
+$logo-height-2lines: 102;
+$header-image-width: 1200;
+$header-image-height: 300;
+$header-image-line: 1;
+
+// Box
+$box-padding: 20px;
+
+

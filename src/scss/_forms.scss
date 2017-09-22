@@ -1,0 +1,111 @@
+// **************************************************
+// FORMS
+// **************************************************
+//
+// General
+// Tokenfields
+// Typeahead
+//
+
+// ************
+// General
+// ************
+
+form .btn {
+  margin-bottom: 0;
+}
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  margin-top: 1px;
+}
+
+
+// ************
+// Tokenfields
+// ************
+
+// Extra styles on top of boostrap-tokenfield.min.css
+
+.tokenfield .token .close {
+  line-height: 1.3em !important;
+}
+
+.tokenfield .token {
+  margin-right: 10px !important;
+}
+
+.tokenfield .token-input {
+  @media only screen and (min-width: $screen-md-min) {
+    min-width: 150px !important;
+  }
+  margin-bottom: 5px !important;
+}
+
+.tokenfield .token-input:focus {
+  margin-bottom: 6px !important;
+}
+
+input.token-input.tt-input {
+  font-size: 16px;
+  .tt-hint {
+    font-size: 16px;
+    top: -1px;
+  }
+}
+
+
+// ************
+// Typeahead
+// ************
+
+// Extra styles on top of tokenfield-typeahead.min.css
+
+.tt-dataset {
+  min-width: 160px;
+  margin-top: 2px;
+  padding: 5px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, .2);
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+
+.tokenfield .tt-dataset {
+  margin-top: 3px;
+  margin-left: -13px;
+}
+
+.tt-suggestion {
+  padding: 6px 12px !important;
+}
+
+.tt-suggestion.tt-selectable:hover,
+.tt-suggestion.tt-selectable.tt-cursor {
+  background-image: none;
+  color: #fff;
+  filter: none;
+  background-color: $link-color;
+  cursor: pointer;
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.twitter-typeahead .tt-input {
+  padding: 0;
+  height: auto;
+}
+
+.twitter-typeahead .tt-hint {
+  border: none !important;
+}

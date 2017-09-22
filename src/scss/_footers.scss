@@ -1,0 +1,167 @@
+// **************************************************
+// FOOTERS
+// **************************************************
+
+footer {
+  margin: 10px 0 20px 0;
+  @media print {
+    display: none;
+  }
+
+  .footer-social {
+    float: left;
+
+    @media only screen and (max-width: $screen-xs-max) {
+      float: none;
+      text-align: center;
+
+      &.ss-icon ul {
+        margin-top: 20px;
+
+        & > li {
+          & > a {
+            font-size: 40px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    ul {
+      margin-left: 0;
+      padding-left: 0;
+      margin-top: 0;
+
+      li {
+        display: inline-block;
+        margin: 0 1em;
+
+        a {
+          color: lighten($gray-light, 10%);
+
+          &:hover {
+            text-decoration: none;
+            color: $brand-primary;
+          }
+        }
+      }
+    }
+
+    &.ss-icon ul li {
+      a {
+        color: lighten($gray-light, 20%);
+      }
+
+      a:hover {
+        color: $link-color;
+      }
+    }
+  }
+
+  .footer-links {
+    float: right;
+
+    @media only screen and (max-width: $screen-xs-max) {
+      float: none;
+      text-align: center;
+    }
+
+    ul {
+      margin-left: 0;
+      padding-left: 0;
+
+      li {
+        display: inline-block;
+        padding: 0 15px;
+
+        a {
+          color: lighten($gray-light, 10%);
+
+          &:hover {
+            text-decoration: none;
+            color: $link-color;
+          }
+        }
+      }
+    }
+  }
+
+  &.footer-iso {
+    background-image: url('assets/img/iso/footer_background.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    margin-top: -15px;
+    margin-bottom: 0;
+    background-color: #E3E3E3;
+    text-align: center;
+    padding: 15px 30px 0 30px;
+    color: grey;
+
+    .footer-links {
+      width: 100%;
+
+      ul {
+        li {
+          margin: 0;
+          padding: 10px 10px 10px 15px;
+
+          a {
+            color: #808080;
+          }
+          a:hover {
+            color: $iso-red;
+          }
+        }
+      }
+
+    }
+    .footer-social {
+      width: 100%;
+      margin: 20px 0;
+      text-align: center;
+
+      ul {
+
+        li {
+          margin: 0.5em;
+
+          @media only screen and (max-width: $screen-xs-max) {
+            width: 33%;
+            float: left;
+            padding: 2em 0 4em 0;
+            margin: 0;
+            text-align: center;
+            line-height: 44px;
+            height: 44px;
+            border-right: 1px solid lightgray;
+            border-bottom: 1px solid lightgray;
+
+            a {
+              font-size: 70px !important;
+              float: none !important;
+            }
+            &.lastcol {
+              border-right: none;
+            }
+            &.lastrow {
+              border-bottom: none;
+            }
+          }
+
+          a {
+            font-family: 'SSSocial';
+            font-size: 50px;
+            font-weight: bold;
+            line-height: 44px;
+            @media only screen and (max-width: $screen-xxs-max) {
+              float: left;
+            }
+          }
+        }
+      }
+    }
+    a {
+      color: $gray-dark;
+    }
+  }
+}

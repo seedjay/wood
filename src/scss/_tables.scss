@@ -1,0 +1,96 @@
+// **************************************************
+// TABLES
+// **************************************************
+
+// Tables
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  border-top: 1px solid darken($gray-lighter, 2%);
+}
+
+.table > thead > tr > th {
+  border-bottom: 1px solid darken($gray-lighter, 5%);
+}
+
+// .table-valign aligns vertically
+.table.table-vmiddle {
+  tbody,
+  tfoot {
+    tr>td {
+      vertical-align: middle;
+    }
+  }
+}
+
+// Responsive tables (<767px)
+@media only screen and (max-width: $screen-xs-max) {
+
+  // Force table to not be like tables anymore
+  .responsive-table,
+  .responsive-table thead,
+  .responsive-table tbody,
+  .responsive-table th,
+  .responsive-table td,
+  .responsive-table tr {
+    display: block;
+  }
+
+  // Hide table headers (but not display: none;, for accessibility)
+  .responsive-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .responsive-table tr {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .responsive-table,
+  .responsive-table th,
+  .responsive-table td,
+  .responsive-table tr:last-child {
+    border: none !important;
+  }
+
+  .responsive-table td {
+    position: relative;
+    padding-left: 35% !important;
+    white-space: normal;
+    text-align: left;
+  }
+
+  .responsive-table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 30%;
+    padding-right: 10px;
+    overflow: hidden;
+    text-align: right;
+    font-weight: bold;
+    content: attr(data-title);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .responsive-table input,
+  .responsive-table select {
+    max-width: 80px;
+  }
+
+  .responsive-table > thead > tr > th,
+  .responsive-table > thead > tr > td,
+  .responsive-table > tbody > tr > th,
+  .responsive-table > tbody > tr > td,
+  .responsive-table > tfoot > tr > th,
+  .responsive-table > tfoot > tr > td {
+    padding: 6px;
+  }
+
+}
+

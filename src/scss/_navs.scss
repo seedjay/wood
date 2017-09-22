@@ -1,0 +1,1691 @@
+// **************************************************
+// NAVS
+// **************************************************
+//
+// --------------------------------------------------
+// 3 levels navigation (ISO.org)
+// 2 levels navigation (TCs, Webstores, Satellites)
+// Topbar
+// Side navigation (3rd level navigation)
+// Pagination navigation
+// Navs Tabs & Pills
+// Breadcrumb
+// Stages
+// Sitemap
+// --------------------------------------------------
+
+// ------------------------------------
+// 3 levels navigation (ISO.org)
+// ------------------------------------
+
+.nav-3levels {
+  margin-bottom: 53px;
+  padding: 0;
+
+  // For all UL, LI and A
+  ul {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    border: none;
+    padding: 0 15px;
+    border-radius: 0;
+
+    li {
+      position: static;
+      float: left;
+      margin-right: 1px;
+
+      &.active > a,
+      &.active > a:hover {
+        background-color: transparent;
+      }
+
+      &.hasChildren.open {
+        > a {
+          border-top: 1px solid darken($iso-nav-colorL1, 10%);
+          border-left: 1px solid darken($iso-nav-colorL1, 10%);
+          border-right: 1px solid darken($iso-nav-colorL1, 10%);
+          border-bottom-color: transparent;
+        }
+      }
+      &.noChildren.open {
+        > a {
+          border: 1px solid transparent;
+        }
+      }
+
+      a {
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 17px;
+        color: $gray-light;
+        text-shadow: 0 0 2px rgba(50, 50, 50, 0.2);
+        border: 1px solid rgba(0, 0, 0, 0);
+        bottom: -1px;
+
+        @media only screen and (max-width: $screen-md-max) {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+
+        &:hover,
+        &:focus {
+          background-color: transparent;
+        }
+      }
+
+      &.disabled a {
+        color: lighten($gray-light, 20%);
+      }
+
+      .glyphicon {
+        font-size: 15px;
+      }
+
+    }
+
+    // verticaline hidden after 'active' or 'hover' tab
+    &.verticaline {
+      & > li.hasChildren.open + li {
+        background: none;
+      }
+    }
+
+    .navbar-nav {
+      box-shadow: none;
+    }
+  }
+
+  .dropdown-menu {
+    & > li > a {
+      color: $gray-light; // To correct the fact that the dropdown gets black when not hover anymore
+    }
+  }
+
+  ul.nav-level1 {
+    position: relative;
+
+    // level1 is open: show level-2
+    & > li.open {
+      & > ul {
+        display: block;
+
+        // show above levels when li is hover only (but not when active)
+        li.hasChildren:hover {
+          & > ul {
+            display: block;
+          }
+
+          & > .nav-panel {
+            display: block;
+          }
+        }
+      }
+
+      & > .nav-panel {
+        display: block;
+      }
+    }
+
+    // level-1 is hover or open: change colors
+    & > li.hasChildren.open {
+      & > a {
+        background-color: $iso-nav-colorL2;
+      }
+
+      & > ul.nav-level2 {
+        border-top: 1px solid darken($iso-nav-colorL1, 10%);
+        background-color: $iso-nav-colorL2;
+      }
+
+      & > .nav-panel {
+        background-color: $iso-nav-colorL2;
+
+        > .panel-image > .fade-gray {
+          @include gradient-horizontal(rgba($iso-nav-colorL2, 0), rgba($iso-nav-colorL2, 1), 0%, 100%);
+        }
+        & > ul.navbar-nav {
+
+          & > li {
+            border-bottom: 1px solid darken($iso-nav-colorL2, 5%);
+            &:hover,
+            &.active:hover {
+              background-color: lighten($iso-nav-colorL2, 2%);
+            }
+            &.active {
+              background-color: $iso-nav-colorL2;
+            }
+          }
+        }
+      }
+    }
+
+    // level-1 is open: change z-index
+    & > li.hasChildren.open {
+      & > a {
+        z-index: 22;
+      }
+
+      & > ul.nav-level2,
+      & > .nav-panel {
+        z-index: 20;
+      }
+    }
+
+    // level-1 is hover: z-index above open
+    & > li.hasChildren:hover {
+      & > a {
+        z-index: 26;
+      }
+
+      & > ul.nav-level2,
+      & > .nav-panel {
+        z-index: 24;
+      }
+    }
+
+    // level1 is active: change colors and z-index
+    & > li.hasChildren.active {
+      & > a {
+        z-index: 15;
+      }
+
+      & > .nav-panel {
+        z-index: 10;
+
+        & > ul.navbar-nav {
+          & > li {
+            border-bottom: 1px solid darken($iso-nav-colorL1, 5%);
+          }
+        }
+      }
+
+      & > ul.nav-level2 {
+        z-index: 10;
+      }
+    }
+
+    // level1 : all other cases
+    > li {
+
+      > a {
+        // first level navigation has a bigger font size
+        font-size: 18px;
+      }
+
+      ul.nav-level2 {
+
+        // COLORS for LEVEL-2
+        & > li.hasChildren.open {
+
+          & > a {
+            background-color: $iso-nav-colorL3;
+          }
+
+          // COLORS for LEVEL-3
+          & > ul.nav-level3 {
+            border-top: 1px solid darken($iso-nav-colorL1, 10%);
+            background-color: $iso-nav-colorL3;
+
+            & > li.hasChildren {
+              & > ul {
+                display: none;
+              }
+            }
+
+            // COLORS for LEVEL-4
+            & > li.hasChildren.open {
+              & > a {
+                background-color: $iso-nav-colorL4;
+              }
+
+              // colors of level-4
+              & > ul {
+                display: block;
+                border-top: 1px solid darken($iso-nav-colorL1, 10%);
+                background-color: $iso-nav-colorL4;
+              }
+
+              // colors of nav-panel Level-4
+              & > .nav-panel {
+                background-color: $iso-nav-colorL4;
+
+                > .panel-image > .fade-gray {
+                  @include gradient-horizontal(rgba($iso-nav-colorL4, 0), rgba($iso-nav-colorL4, 1), 0%, 100%);
+                }
+                & > ul.navbar-nav {
+                  border-bottom: none;
+
+                  & > li {
+                    border-bottom: 1px solid darken($iso-nav-colorL4, 5%);
+
+                    &:hover,
+                    &.active:hover {
+                      background-color: lighten($iso-nav-colorL4, 2%);
+                    }
+
+                    &.active {
+                      background-color: $iso-nav-colorL4;
+                    }
+                  }
+                }
+              }
+            }
+
+            // Z-INDEX for LEVEL-4
+            & > li.hasChildren.open {
+              & > a {
+                z-index: 42;
+              }
+
+              & > ul, .nav-panel {
+                z-index: 40;
+              }
+            }
+
+            // level-3 is hover: z-index higher than level-3 open
+            & > li.hasChildren:hover {
+              & > a {
+                z-index: 46;
+              }
+              & > ul, .nav-panel {
+                z-index: 44;
+              }
+            }
+
+          }
+
+          // COLORS for nav-panel LEVEL-3
+          & > .nav-panel {
+            background-color: $iso-nav-colorL3;
+
+            > .panel-image > .fade-gray {
+              @include gradient-horizontal(rgba($iso-nav-colorL3, 0), rgba($iso-nav-colorL3, 1), 0%, 100%);
+            }
+
+            & > ul.navbar-nav {
+              & > li {
+                border-bottom: 1px solid darken($iso-nav-colorL3, 5%);
+
+                &:hover,
+                &.active:hover {
+                  background-color: lighten($iso-nav-colorL3, 2%);
+                }
+
+                &.active {
+                  background-color: $iso-nav-colorL3;
+                }
+              }
+            }
+          }
+        }
+
+        // Z-INDEX for LEVEL2 and LEVEL-3
+        & > li.hasChildren.open {
+          & > a {
+            z-index: 32;
+          }
+
+          & > ul.nav-level3, .nav-panel {
+            z-index: 30;
+          }
+        }
+
+        // level-2 is hover: z-index higher than level-1 open
+        & > li.hasChildren:hover {
+          & > a {
+            z-index: 36;
+          }
+
+          & > ul.nav-level3, .nav-panel {
+            z-index: 34;
+          }
+        }
+
+      }
+
+      .dropdown-menu {
+        background-clip: initial; // To correct the 1px space on the right of the bar on a Mac (retina display)
+      }
+
+      .dropdown-menu.nav-panel {
+        padding: 0;
+        border-top: 1px solid darken($iso-nav-colorL1, 10%);
+        border-right: none;
+        border-left: none;
+        border-radius: 0;
+        z-index: 10;
+        width: 100%;
+
+        @include box-shadow(none);
+        @include border-top-radius(0);
+        @include border-bottom-radius(0);
+        @include border-left-radius(0);
+        @include border-right-radius(0);
+
+        & > .panel-image {
+          width: 400px;
+          float: left;
+          position: relative;
+          z-index: 10;
+
+          @media only screen and (max-width: $screen-sm-max) {
+            width: auto;
+          }
+
+          img {
+            width: 400px;
+            height: 100%;
+          }
+
+          & > .fade-gray {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 300px;
+
+            @media only screen and (max-width: $screen-sm-max) {
+              width: 200px;
+            }
+          }
+        }
+
+        & > .panel-teaser {
+          width: 28%;
+          left: 27%;
+          float: left;
+          position: absolute;
+          padding: 30px;
+          z-index: 20;
+
+          a {
+            padding-left: 0;
+            padding-right: 0;
+            font-size: inherit;
+            color: inherit;
+            text-shadow: none;
+            border: none;
+            bottom: 0;
+            //&:hover {
+            //  border-bottom: 1px solid $iso-red;
+            //}
+          }
+
+          @media only screen and (max-width: $screen-sm-max) {
+            width: 70%;
+            right: 0;
+            text-align: right;
+          }
+        }
+
+        // Sub-navigation
+        & > ul.navbar-nav {
+          float: right;
+          position: relative;
+          width: 45%;
+          padding: 30px 0;
+          border-bottom: none;
+          border-top: none;
+
+          @media only screen and (max-width: $screen-sm-max) {
+            width: 100%;
+            border-top: 1px solid #c2c2c2;
+          }
+
+          & > li {
+            float: left;
+            width: 50%;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+
+            @media only screen and (max-width: $screen-sm-max) {
+              width: 33.3%;
+            }
+
+            & > a {
+              &.active {
+                background-color: transparent;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-form {
+    position: relative;
+    top: 52px;
+    margin-right: 15px;
+
+    @media only screen and (max-width: $screen-xs-max) {
+      top: 0;
+    }
+  }
+}
+
+// Mixin that defines color theme
+@mixin nav-3levels-color($color) {
+  .nav-3levels {
+    ul li.active > a,
+    ul li.inPath > a,
+    li:hover > a,
+    li a:hover,
+    ul li.hasChildren.open > a,
+    .dropdown-menu > li > a.active,
+    .dropdown-menu > li > a:hover {
+      color: $color;
+    }
+
+    ul.nav-level1 {
+      border-bottom: #{$header-image-line}px solid darken($iso-nav-colorL1, 10%);
+
+      ul.nav-level2 {
+        border-bottom: #{$header-image-line}px solid darken($iso-nav-colorL1, 10%);
+
+        ul.nav-level3 {
+          border-bottom: #{$header-image-line}px solid darken($iso-nav-colorL1, 10%);
+
+          & ul.navbar-nav,
+          & .nav-panel {
+            border-bottom: #{$header-image-line}px solid darken($iso-nav-colorL1, 10%);
+          }
+        }
+      }
+
+      .nav-panel {
+        border-bottom: #{$header-image-line}px solid darken($iso-nav-colorL1, 10%);
+
+        .panel-teaser {
+          h1, h2, h3, h4 {
+            color: $text-color;
+            > a {
+              color: $color;
+              &:hover {
+                text-decoration: none;
+                border-bottom: 1px solid $color;
+              }
+            }
+          }
+          p {
+            color: $text-color;
+          }
+        }
+
+        ul.nav {
+          & > li.active a,
+          & > li:hover a {
+            color: $color;
+          }
+        }
+      }
+    }
+
+    .navbar-form .input-group-btn:hover .glyphicon {
+      color: $color;
+    }
+  }
+}
+
+/* Color themes */
+.theme-red {
+  @include nav-3levels-color($iso-red);
+}
+
+.theme-blue {
+  @include nav-3levels-color($iso-blue);
+}
+
+// ------------------------------------
+// 2 levels navigation (ISO.org)
+// ------------------------------------
+
+.nav-2levels {
+  &.nav-container {
+    padding: 0 30px;
+    border-bottom: #{$header-image-line}px solid #999;
+  }
+
+  @media only screen and (max-width: $screen-xs-max) {
+    padding: 0;
+  }
+
+  & > ul.navbar-nav {
+    position: relative;
+
+    & > li {
+      a {
+        font-size: 18px;
+        color: lighten($gray-light, 10%);
+        margin-bottom: 0;
+      }
+
+      .glyphicon {
+        font-size: 15px;
+      }
+
+      // Navigation LEVEL2 Dropdown
+      ul.dropdown-menu {
+        border-radius: 0;
+        width: auto;
+        margin-bottom: 0;
+
+        & > li a {
+          font-size: 16px;
+          color: #333;
+          padding: 8px 20px;
+          text-shadow: none;
+        }
+
+        & > li.active a,
+        & > li.active a:hover {
+          background-color: lighten($gray-lighter, 3%);
+        }
+
+        & > li a,
+        & > li a:hover {
+          border-bottom: none;
+        }
+      }
+    }
+
+    & > li a:hover,
+    & > li.active a:hover,
+    & > li a:focus {
+      background-color: transparent;
+      color: lighten($gray-light, 10%);
+    }
+
+    & > li.active,
+    & > li.inPath {
+      a,
+      a:hover,
+      a:focus {
+        border-bottom: #{$header-image-line}px solid $gray-lighter;
+        margin-bottom: -#{$header-image-line}px;
+      }
+    }
+  }
+
+  // Semi-transparent nav-bar
+  &.semi-transparent {
+    background-color: rgba(255, 255, 255, 0.75);
+
+    ul.navbar-nav {
+      & > li a {
+        text-shadow: none !important;
+      }
+    }
+  }
+}
+
+.navbar-thin {
+  .nav-2levels {
+    border-bottom-width: 1px !important;
+
+    ul.navbar-nav {
+      & > li {
+        ul.dropdown-menu {
+          margin-top: 0;
+        }
+      }
+
+      & > li.active,
+      & > li.inPath {
+        a,
+        a:hover,
+        a:focus {
+          border-bottom-width: 1px;
+          margin-bottom: -1px;
+        }
+      }
+    }
+  }
+}
+
+// Mixin that defines color theme
+@mixin nav-2levels-color($color) {
+  .nav-2levels {
+    ul.navbar-nav {
+      & > li.active > a,
+      & > li.inPath > a {
+        color: $color;
+        @media only screen and (min-width: $screen-sm-min) {
+          border-bottom-color: $color !important;
+        }
+      }
+
+      & > li.open > a {
+        color: $color;
+      }
+
+      & > li > a:hover,
+      li > a:hover {
+        color: $color;
+      }
+
+      ul.dropdown-menu > li > a:hover,
+      ul.dropdown-menu > li.active > a {
+        color: $color;
+      }
+    }
+
+    &.semi-transparent {
+      ul.navbar-nav > li.active > a,
+      ul.navbar-nav > li.inPath > a {
+        color: $color;
+      }
+    }
+  }
+}
+
+/* Color themes */
+.theme-red {
+  @include nav-2levels-color($iso-red);
+}
+
+.theme-blue {
+  @include nav-2levels-color($iso-blue);
+}
+
+
+// for nav-2levels and nav-3levels
+.nav-3levels,
+.nav-2levels {
+  li.hasChildren > a:after {
+    content: ' >\a0';
+    margin-left: 6px;
+    vertical-align: middle;
+    margin-bottom: -4px;
+    display: inline-block;
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+
+  ul.nocaret > li.hasChildren > a:after {
+    content: '';
+    margin: 0;
+  }
+
+  .navbar-nav > .active,
+  .navbar-nav > .open {
+    > a,
+    > a:hover,
+    > a:focus {
+      background-color: transparent;
+    }
+  }
+}
+
+
+// ------------------------------------
+// TOPBAR
+// ------------------------------------
+
+.topbar {
+  height: 32px;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  margin-top: 5px;
+
+  @media print {
+    display: none;
+  }
+
+  .navbar-header {
+    margin-bottom: 0;
+    float: left;
+
+    .topbar-brand {
+      font-size: 20px;
+      font-weight: bold;
+      float: left;
+      padding: 2px 30px 2px 10px;
+      color: $gray-light;
+      line-height: 32px;
+    }
+
+    a:hover.topbar-brand {
+      color: $iso-red;
+      text-decoration: none;
+    }
+  }
+
+  &.topbar-light {
+    background-color: rgba(0, 0, 0, 0.1);
+
+    ul > li > a {
+      color: $gray-dark;
+      &:hover {
+        color: #000;
+      }
+    }
+
+    .poweredby-txt {
+      color: $gray-light;
+    }
+
+    ul.dropdown-menu li a {
+      color: $gray-dark;
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  &.topbar-dark {
+    background-color: rgba(0, 0, 0, 0.4);
+
+    @extend .topbar-whitecontent;
+
+    ul.dropdown-menu {
+      background: rgba(0, 0, 0, 0.6);
+
+      & > li > a:hover {
+        background: #000;
+      }
+    }
+  }
+
+  &.topbar-whitecontent {
+    ul > li > a {
+      color: $gray-lighter;
+
+      &:hover {
+        color: #FFF;
+      }
+    }
+
+    .poweredby-txt {
+      color: $gray-lighter;
+    }
+  }
+
+  .topbar-content {
+    line-height: 32px;
+    font-size: 14px;
+    padding: 0 30px;
+
+    // hide .offcanvas-menu when small screens (to show it in the offcanvas instead)
+    @media only screen and (max-width: $screen-xs-max) {
+      .offcanvas-menu {
+        display: none;
+      }
+    }
+
+    .dropdown-menu {
+      min-width: 0;
+      left: auto;
+      right: 0;
+      border-radius: 0;
+      font-size: 14px;
+      z-index: 999;
+    }
+
+    #lang-switcher,
+    .toplinks {
+      position: relative;
+      float: right;
+      list-style-type: none;
+      padding-left: 0;
+      margin-left: 0;
+
+      @media only screen and (max-width: $screen-xs-max) {
+        margin-right: 5px;
+      }
+    }
+
+    #lang-switcher li::first-letter {
+      text-transform: uppercase;
+    }
+
+    .toplinks,
+    .toplinks ul {
+      float: right;
+
+      li {
+        display: inline-block;
+        margin-right: 15px;
+      }
+    }
+
+    .logo {
+      position: relative;
+      float: left;
+      height: 32px;
+      width: 32px;
+      top: 0;
+      background-position: 1px 2px;
+      background-size: 30px 28px;
+      margin-left: 5px;
+      @include box-shadow(1px 1px 5px 0px rgba(0, 0, 0, 0.4));
+
+      &.poweredby {
+        float: right;
+        @media only screen and (max-width: $screen-xs-max) {
+          margin-left: 15px;
+        }
+      }
+
+      &.isologo {
+        background-color: $iso_red;
+      }
+
+      &.bluelogo {
+        background-color: $iso-blue;
+        background-image: url("assets/img/iso/iso-logo.png");
+      }
+    }
+
+    .navbar-header .logo {
+      margin-right: 0;
+    }
+
+    .poweredby-txt {
+      position: relative;
+      float: right;
+      margin-left: 15px;
+
+      @media only screen and (max-width: $screen-xs-max) {
+        display: none;
+      }
+    }
+
+    .btn {
+      margin-top: -2px;
+    }
+  }
+}
+
+// -----------------------------------------
+//  Side navigation (3rd level navigation)
+// -----------------------------------------
+
+nav.side-navigation {
+  margin-bottom: 3em;
+
+  @media only screen and (max-width: $screen-sm-max) {
+    margin-top: 2em;
+  }
+
+  .side-navigation-header {
+    padding-left: 15px;
+    color: #D0D0D0;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 18px;
+  }
+
+  .list-box {
+    margin-right: -30px;
+
+    @media only screen and (max-width: $screen-xs-max) {
+      margin-right: 0;
+    }
+
+    li {
+      &.active {
+        a {
+          border-right: none;
+
+          @media only screen and (max-width: $screen-xs-max) {
+            border-right: 1px solid lighten($gray-lighter, 1%);
+          }
+        }
+      }
+    }
+
+    a.list-group-item {
+      @media only screen and (max-width: $screen-xs-max) {
+        border-right: 1px solid lighten($gray-lighter, 1%);
+        padding-right: 15px;
+      }
+
+      &.active {
+        border-right: none;
+      }
+    }
+  }
+}
+
+// ------------------------------------
+// Pagination navigation
+// ------------------------------------
+
+.pagination-container {
+  nav.navbar {
+    @media only screen and (max-width: $screen-xs-max) {
+      float: right;
+    }
+
+    ul.pagination {
+      margin-bottom: 0.1em;
+
+      li {
+        a {
+          border: none;
+          border-left: 1px solid #DDD;
+          color: darken($gray-lighter, 25%);
+        }
+
+        a:hover {
+          color: darken($gray-lighter, 25%);
+        }
+      }
+
+      li:first-child a {
+        border: none;
+      }
+
+      li.active {
+        a,
+        a:hover,
+        a:focus,
+        span,
+        span:hover,
+        span:focus {
+          background-color: darken($gray-lighter, 25%);
+          border-color: darken($gray-lighter, 25%);
+          color: #FFF;
+        }
+      }
+    }
+
+    .pagination-info {
+      text-align: center;
+      color: darken($gray-lighter, 25%);
+    }
+  }
+}
+
+// Mixin that defines color theme
+@mixin pagination-container-color($color) {
+  .pagination-container {
+    nav.navbar {
+      ul.pagination {
+        li a:hover {
+          color: $color;
+        }
+        li.active {
+          a,
+          a:hover,
+          a:focus,
+          span,
+          span:hover,
+          span:focus {
+            background-color: $color;
+            border-color: $color;
+            color: #FFF;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Color themes */
+.theme-red {
+  @include pagination-container-color($iso-red);
+}
+
+.theme-blue {
+  @include pagination-container-color($iso-blue);
+}
+
+// ------------------------------------
+// Step list
+// ------------------------------------
+
+// on nav-pills / nav-tabs
+.step-list .nav-pills,
+.step-list .nav-tabs,
+.nav-tabs.step-list,
+.nav-pills.step-list,
+.step-list .navbar-nav,
+.navbar-nav.step-list {
+  > li {
+    margin-left: 20px;
+    &:before {
+      content: ">";
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      margin: auto;
+      top: -14px; // corresponds to half of font-size +2px (top & bottom border)
+      bottom: 0;
+      font-size: 24px;
+      left: -14px;
+      font-weight: 500;
+      color: #c6c6c6;
+    }
+    &:first-child {
+      margin-left: 0;
+      &:before {
+        content: '';
+      }
+    }
+    // Responsive tabs <480px
+    @media only screen and (max-width: $screen-xxs-max) {
+      margin-left: 0;
+      margin-bottom: 20px;
+      a,
+      a:hover {
+        @include border-bottom-radius($nav-pills-border-radius);
+        @include border-top-radius($nav-pills-border-radius);
+      }
+      a:first-child {
+        border-bottom: 1px solid #dadada;
+      }
+      &:before {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        margin: 0;
+        top: -32px;
+        bottom: 0;
+        left: -6px;
+        @include rotate(90deg);
+      }
+    }
+  }
+}
+
+// Pills only
+.nav-pills.step-list,
+.step-list .nav-pills {
+  > li.active {
+    > a:hover,
+    > a:focus {
+      background-color: $btn-primary-bg;
+    }
+  }
+  // Pills >480px
+  @media only screen and (min-width: $screen-xs-min) {
+    > li {
+      > a {
+        border: 1px solid $nav-tabs-border-color;
+        padding: 10px 15px 8px;
+      }
+      &.active > a {
+        border: 1px solid $btn-primary-border;
+      }
+    }
+  }
+}
+
+// navbar-nav (nav-2levels) only
+.step-list .navbar-nav,
+.navbar-nav.step-list {
+  > li:before {
+    top: -10px;
+  }
+  // navbar-nav <480px
+  @media only screen and (max-width: $screen-xs-max) {
+    > li {
+      margin: 0 0 20px 0;
+      > a {
+        text-align: center !important;
+      }
+      &:before {
+        margin: 0 50%;
+        width: 32px;
+        height: 32px;
+        @include rotate(90deg);
+        top: -12px;
+        left: -16px;
+      }
+    }
+  }
+}
+
+
+// ------------------------------------
+// Navs Tabs & Pills
+// ------------------------------------
+
+// nav-pills only
+.nav-pills {
+  > li+li {
+    margin-left: 5px;
+  }
+
+  @media only screen and (min-width: $screen-xs-min) {
+    > li > a {
+      margin-bottom: 10px;
+    }
+  }
+  @media only screen and (max-width: $screen-xxs-max) {
+    > li,
+    > li + li {
+      margin: 0 0 5px 0;
+    }
+  }
+}
+
+.tab-content {
+  padding: 30px 30px;
+  margin-bottom: 2em;
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.tab-content,
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+  background-color: lighten($gray-lighter, 5%);
+}
+
+.nav-pills + .tab-content {
+  border-top: 1px solid darken($gray-lighter, 5%);
+}
+
+.tab-content {
+  border-bottom: 1px solid darken($gray-lighter, 5%);
+
+  @media only screen and (max-width: $screen-xxs-max) {
+    padding: 38px 38px;
+  }
+}
+
+.nav-tabs,
+.nav-pills {
+  margin: 0 -30px;
+  padding: 0 30px;
+
+  a {
+    outline: 0;
+  }
+
+  // headings within nav-tabs
+  > li {
+    a > h2,
+    a > h3,
+    a > h4,
+    a > h5,
+    a > h6 {
+      margin-bottom: 0;
+    }
+  }
+
+  // Responsive tabs <480px
+  @media only screen and (max-width: $screen-xxs-max) {
+    > li {
+      width: 100%;
+      text-align: center;
+
+      &.active > a {
+        &:hover,
+        &:focus {
+          background-color: $gray-lighter;
+          margin-right: 0;
+          border-radius: 0;
+        }
+      }
+      > a,
+      > a:hover {
+        margin-right: 0;
+        border-radius: 0;
+        border: 1px solid darken($gray-lighter, 8%);
+      }
+    }
+  }
+}
+
+.tab-pane > .well {
+  background-color: #fff;
+}
+
+// ------------------------------------
+// Breadcrumb
+// ------------------------------------
+
+div.main.container.breadcrumb-container {
+  margin-top: 0;
+  padding: 15px 30px 5px 30px;
+  background-color: lighten($gray-lighter, 1%);
+  a {
+    color: $gray-light;
+    &:hover {
+      color: $iso-red;
+      text-decoration: none;
+    }
+  }
+
+  small, .small {
+    ol.breadcrumb {
+      margin-top: 2px;
+    }
+  }
+
+  ol.breadcrumb {
+    padding: 0;
+    margin-bottom: 10px;
+    li:last-child,
+    li:last-child a {
+      color: $iso-red;
+    }
+  }
+
+  li.active,
+  li.active a {
+    color: $iso-red;
+    li,
+    li > a {
+      color: $gray-light;
+    }
+  }
+}
+
+ol.breadcrumb {
+  background-color: transparent;
+  padding: 5px;
+
+  & > li + li:before {
+    content: "> ";
+  }
+}
+
+/* Color themes */
+.theme-red ol.breadcrumb li a.active {
+  color: $iso-red;
+}
+
+// ------------------------------------
+// Stages
+// ------------------------------------
+
+// width of the dropdown menu (same as ul.stages>li)
+$dropdown_min-width: 225px;
+
+ul.stages {
+
+  .stage-code,
+  .stage-title {
+    display: inline-block;
+  }
+
+  .caret {
+    font-size: 20px;
+  }
+
+  > li {
+    margin-left: 2px;
+    margin-bottom: 20px;
+    @media print {
+      display: inline-block;
+    }
+
+
+    & > a {
+      background-color: $gray-lighter;
+      color: darken($gray-lighter, 15%);
+      font-size: 20px;
+      font-weight: 500;
+      padding-left: 25px;
+      line-height: 20px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+
+      //min-width: 60px;
+      //transition: min-width .5s;
+      //-webkit-transition: min-width .5s; /* Safari */
+      //transition-timing-function: ease-in;
+
+      .stage-title,
+      .caret {
+        display: none;
+      }
+
+      // arrow to the right
+      &::after {
+        content: "";
+        border-top: 22px solid transparent;
+        border-bottom: 22px solid transparent;
+        border-left: 10px solid $gray-lighter;
+        position: absolute;
+        right: -10px;
+        top: 0;
+        z-index: 10;
+      }
+      // arrow to the right
+      &::before {
+        content: "";
+        border-top: 22px solid transparent;
+        border-bottom: 22px solid transparent;
+        border-left: 10px solid #FFF;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 5;
+      }
+
+      // Show the stage title when hover
+      &:hover {
+        min-width: $dropdown_min-width;
+        color: darken($gray-lighter, 25%);
+
+        .stage-title,
+        .caret {
+          display: inline-block;
+        }
+      }
+    }
+
+    & > .stage-date {
+      position: absolute;
+      font-size: x-small;
+      padding: 3px 0 0 25px;
+      @media only screen and (max-width: $screen-xs-max) {
+        right: 15px;
+        top: 13px;
+      }
+    }
+
+    &.dropdown.open {
+      min-width: $dropdown_min-width;
+
+      & > a {
+        color: $gray-dark;
+      }
+
+      .stage-title,
+      .caret {
+        display: inline-block;
+      }
+
+      .stage-date {
+        float: right;
+        font-size: x-small;
+        padding-left: 15px;
+        color: #c4c4c4;
+      }
+    }
+
+    // active stage level1
+    &.active {
+
+      & > a {
+        color: $gray-light;
+        min-width: $dropdown_min-width;
+      }
+
+      .stage-title,
+      .caret {
+        display: inline-block;
+      }
+
+    }
+
+    // STAGE LEVEL2
+    .dropdown-menu {
+      width: 100%;
+      background-color: $gray-lighter;
+      border: none;
+      @include box-shadow(none);
+      font-size: 14px;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-left: 0;
+
+      & > li > a {
+        white-space: normal;
+        padding: 5px 15px 2px 15px;
+        border-top: 1px solid white;
+
+        .stage-code {
+          font-weight: bold;
+        }
+      }
+
+      & > li:last-child,
+      & > li:last-child > a {
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      // active stage level2
+      .active > a,
+      .active > a:hover,
+      .active > a:focus {
+        background-color: $gray-light;
+      }
+    }
+  }
+
+  > li:first-child {
+    & > a {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      padding-left: 20px;
+    }
+
+    & > a::before {
+      display: none;
+    }
+  }
+
+  > li:first-child.open {
+    & > a {
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  > li:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    & > a {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding-right: 20px;
+    }
+
+    & > a::after {
+      display: none;
+    }
+  }
+
+  > li:last-child.open {
+    & > a {
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  // mixin that defines a colored list item
+  @mixin stage-list-color($type,$color-text,$color-bg) {
+    & > li.alert-#{$type} {
+      &.open > a,
+      > a {
+        background-color: $color-bg;
+        color: $color-text !important;
+      }
+      > a:hover {
+        background-color: darken($color-bg, 2%);
+      }
+
+      > a:after {
+        border-left-color: $color-bg;
+      }
+
+      > a:hover:after {
+        border-left-color: darken($color-bg, 2%);
+      }
+
+      .dropdown-menu {
+        background-color: $color-bg;
+
+        li a:hover {
+          background-color: darken($color-bg, 2%);
+        }
+
+        li.active a {
+          background-color: $color-text;
+        }
+
+        li.active a:hover {
+          background-color: darken($color-text, 2%);
+        }
+        .stage-date {
+          color: lighten($color-text, 25%);
+        }
+      }
+    }
+  }
+
+  @include stage-list-color("success", $alert-success-text, $alert-success-bg);
+  @include stage-list-color("info", $alert-info-text, $alert-info-bg);
+  @include stage-list-color("warning", $alert-warning-text, $alert-warning-bg);
+  @include stage-list-color("danger", $alert-danger-text, $alert-danger-bg);
+
+  // small medias
+  @media only screen and (max-width: $screen-xs-max) {
+    margin-left: 0;
+    margin-right: 0;
+
+    & > li {
+      margin-bottom: 2px;
+
+      & > a {
+        &::before,
+        &::after {
+          display: none;
+        }
+        .stage-title,
+        .caret {
+          display: inline-block;
+        }
+      }
+
+      // STAGE LEVEL2
+      .dropdown-menu {
+        li > a {
+          background-color: lighten($gray-lighter, 4%);
+        }
+
+      }
+    }
+    > li:first-child {
+      & > a {
+        border-radius: 5px 5px 0 0;
+        padding-left: 25px;
+      }
+    }
+    > li:last-child {
+      & > a {
+        border-radius: 0 0 5px 5px;
+      }
+    }
+  }
+}
+
+// Mixin that defines color theme
+@mixin stages-color($color) {
+  ul.stages {
+    .dropdown-menu {
+      // active stage level2
+      .active > a,
+      .active > a:hover,
+      .active > a:focus {
+        background-color: $color;
+      }
+    }
+  }
+}
+
+/* Color themes */
+.theme-red {
+  @include stages-color($iso-red);
+}
+
+.theme-blue {
+  @include stages-color($iso-blue);
+}
+
+// ------------------------------------
+// Sitemap
+// ------------------------------------
+
+// full sitemap
+.sitemap-full {
+  font-size: 36px;
+  ul {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    li {
+      list-style-type: none;
+      margin: 2px 0;
+    }
+  }
+  ul[class^="nav-level"] {
+    font-size: smaller;
+  }
+  ul.nav-level1 > li {
+    border-bottom: 1px solid $gray-lighter;
+    font-weight: 500;
+  }
+  ul.nav-level2 > li {
+    border-bottom: 1px dashed lighten($gray-lighter, 10%);
+    font-weight: bold;
+  }
+  ul.nav-level3 > li {
+    font-weight: normal;
+  }
+}
+
+.sitemap-footer {
+  margin-top: 15px;
+
+  > ul.list-inline-4 > li { width: 24.5%; }
+  > ul.list-inline-5 > li { width: 19.5%; }
+  > ul.list-inline-6 > li { width: 16%; }
+  > ul.list-inline-4,
+  > ul.list-inline-5,
+  > ul.list-inline-6 {
+    > li {
+      padding: 0 7.5px 10px;
+      list-style-type: none;
+      margin-bottom: 15px;
+      clear: bottom;
+      display: inline-block;
+      vertical-align: top;
+      text-align: center;
+
+      > a {
+        font-weight: bold;
+        color: $gray-light;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      @media only screen and (max-width: $screen-xs-max) {
+        width: 32%;
+        &:nth-of-type(4) {
+          clear: both;
+        }
+      }
+      @media only screen and (max-width: $screen-xxs-max) {
+        width: 49%;
+        &:nth-of-type(3),
+        &:nth-of-type(5){
+          clear: both;
+        }
+      }
+    }
+
+    li {
+      line-height: 1.2em;
+      margin-bottom: 4px;
+    }
+
+  }
+
+}
+
+

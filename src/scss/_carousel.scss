@@ -1,0 +1,258 @@
+// **************************************************
+// CAROUSELS
+// **************************************************
+
+.carousel {
+  margin-bottom: 20px;
+
+  @media print {
+    display: none;
+  }
+
+  &.carousel-fade {
+    .carousel-inner {
+      .item {
+        opacity: 0;
+        transition-property: opacity;
+
+        @media all and (transform-3d),
+        (-webkit-transform-3d) {
+          &.next,
+          &.active.right,
+          &.prev,
+          &.active.left {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+          }
+          &.next.left,
+          &.prev.right,
+          &.active {
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+          }
+        }
+      }
+
+      .active {
+        opacity: 1;
+      }
+
+      .active.left,
+      .active.right {
+        left: 0;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .next.left,
+      .prev.right {
+        opacity: 1;
+      }
+    }
+
+    .carousel-control {
+      z-index: 2;
+    }
+  }
+
+  .carousel-inner {
+    .carousel-caption {
+      @include gradient-vertical(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), 0%, 100%);
+      color: #EAEAEA;
+      padding-left: 15%;
+      padding-right: 15%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      padding-top: 60px;
+
+      a {
+        color: lighten($link-color, 35);
+      }
+
+      h3, h2, h1 {
+        a:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .carousel-control {
+    z-index: 5;
+  }
+
+  // Carousel full-width
+  &.full-width {
+    margin-bottom: 0;
+    @media only screen and (max-width: $screen-sm-max) {
+      margin-bottom: 15px;
+    }
+
+    .carousel-caption-full-width {
+      //max-width: 25%;
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      padding: 15px;
+
+      @media only screen and (max-width: #{$screen-sm-max}) {
+        left: 0px;
+
+        &.color-white,
+        &.color-transparent,
+        &.color-none,
+        &.color-default,
+        &.color-lightgray,
+        &.color-gray {
+          background-color: darken($gray-lighter, 5%);
+          color: $text-color;
+          a {
+            color: $link-color;
+          }
+        }
+      }
+
+      .section-head {
+        color: inherit;
+      }
+
+      &.color-primary,
+      &.color-success,
+      &.color-info,
+      &.color-warning,
+      &.color-danger,
+      &.color-black,
+      &.color-white,
+      &.color-lightgray,
+      &.color-gray {
+        @media only screen and (min-width: #{$screen-md-min}) {
+          background-color: transparent;
+          display: block;
+          position: absolute;
+          z-index: 1;
+        }
+      }
+
+      &::after {
+        content: "";
+        opacity: 0.8;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+        border-radius: $border-radius-base;
+      }
+
+      &.color-primary::after {
+        background-color: $brand-primary;
+      }
+
+      &.color-danger::after {
+        background-color: $brand-danger;
+      }
+
+      &.color-success::after {
+        background-color: $brand-success;
+      }
+
+      &.color-warning::after {
+        background-color: $brand-warning;
+      }
+
+      &.color-info::after {
+        background-color: $brand-info;
+      }
+
+      &.color-white::after {
+        background-color: #FFF;
+      }
+
+      &.color-black::after {
+        background-color: #000;
+      }
+
+      &.color-lightgray::after {
+        background-color: lightgray;
+      }
+
+      &.color-gray::after {
+        background-color: gray;
+      }
+
+      &.color-transparent {
+        color: $gray-lighter;
+
+        @media only screen and (min-width: #{$screen-md-min}) {
+          a {
+            color: #FFF;
+          }
+        }
+
+        @media only screen and (max-width: #{$screen-sm-max}) {
+          color: $text-color;
+        }
+      }
+
+      @media only screen and (max-width: #{$screen-sm-max}) {
+        position: relative;
+        width: 100%;
+        max-width: inherit;
+        top: inherit;
+        padding-left: 15%;
+        padding-right: 15%;
+        text-align: center;
+      }
+    }
+
+    .carousel-control {
+      width: 10%;
+      .glyphicon-chevron-left,
+      .icon-prev {
+        margin-left: -7px;
+      }
+    }
+
+    ol.carousel-indicators {
+      top: inherit;
+      bottom: 10px;
+
+      @media only screen and (max-width: #{$screen-sm-max}) {
+        top: 20px;
+        bottom: inherit;
+      }
+    }
+
+    @media only screen and (min-width: #{$screen-sm-min+100}) and (max-width: $screen-sm-max),
+    only screen and (min-width: #{$screen-md-min+100}) and (max-width: $screen-md-max),
+    only screen and (min-width: #{$screen-lg-min+100}) {
+      .carousel-control.left,
+      .carousel-control.right {
+        background-image: none;
+        filter: none; // for IE8
+        color: $gray-light;
+        width: 50px;
+      }
+
+      .carousel-control.left {
+        left: -50px;
+      }
+
+      .carousel-control.right {
+        right: -50px;
+        left: auto;
+      }
+    }
+
+    @media only screen and (max-width: #{$screen-xs-max}) {
+      .glyphicon {
+        font-size: 125%;
+      }
+    }
+  }
+}

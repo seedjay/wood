@@ -1,0 +1,466 @@
+// *************************************************************
+// Images and Figures
+// *************************************************************
+//
+// -----------------------
+// Common styles
+// Figures
+// Vcards
+// Publications
+// Ribbon
+// -----------------------
+
+// ------------------------------------------
+// Common image styles, sizes and alignments
+// ------------------------------------------
+
+.width-100pct {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  height: auto;
+}
+
+.width-500 {
+  max-width: 500px !important;
+  height: auto;
+}
+
+.width-300 {
+  max-width: 300px !important;
+  height: auto;
+}
+
+.width-180 {
+  max-width: 180px !important;
+  height: auto;
+}
+
+.width-100 {
+  max-width: 100px !important;
+  height: auto;
+}
+
+.width-64 {
+  max-width: 64px !important;
+  height: auto;
+}
+
+.width-25pct {
+  max-width: 25%;
+}
+
+.width-40pct {
+  max-width: 40%;
+}
+
+.width-50pct {
+  max-width: 50%;
+}
+
+.width-60pct {
+  max-width: 60%;
+}
+
+.width-75pct {
+  max-width: 75%;
+}
+
+.overflow-bottom {
+  max-width: 25%;
+  max-height: 25%;
+  margin-top: -12.5% !important;
+  margin-bottom: 0 !important;
+}
+
+.min-height-250 {
+  min-height: initial;
+
+  @media only screen and (min-width: $screen-md-min) {
+    min-height: 250px !important;
+  }
+}
+
+.min-height-300 {
+  min-height: initial;
+
+  @media only screen and (min-width: $screen-md-min) {
+    min-height: 300px !important;
+  }
+}
+
+.min-height-400 {
+  min-height: initial;
+
+  @media only screen and (min-width: $screen-md-min) {
+    min-height: 400px !important;
+  }
+}
+
+.min-height-500 {
+  min-height: initial;
+
+  @media only screen and (min-width: $screen-md-min) {
+    min-height: 500px !important;
+  }
+}
+
+.align-right {
+  margin: 0 0 1.2em 2em;
+  float: right !important;
+  .width-100pct {
+    margin-left: 0;
+  }
+}
+
+.align-left {
+  margin: 0 2em 1.2em 0;
+  float: left !important;
+
+  .width-100pct {
+    margin-right: 0;
+  }
+}
+
+.align-center {
+  margin: 0 auto 1.2em auto;
+  float: none;
+  img,
+  figure,
+  .figure {
+    margin: auto;
+  }
+}
+
+.shadow {
+  @include box-shadow(0 1px #FFF inset, 0 1px 3px rgba(34, 25, 25, 0.4));
+}
+
+.shadow-light {
+  @include box-shadow(0px 0px 4px rgba(0, 0, 0, 0.08));
+}
+
+.no-shadow {
+  @include box-shadow(none !important);
+}
+
+.frame {
+  border-radius: 4px;
+  padding: 5px;
+  background: #F5F5F5;
+  @extend .shadow;
+}
+
+.circle,
+.circle img {
+  @include border-top-radius(50%);
+  @include border-bottom-radius(50%);
+  @include border-left-radius(50%);
+  @include border-right-radius(50%);
+  overflow: initial;
+}
+
+.circle figcaption {
+  text-align: center;
+}
+
+// Images are responsive when inside p or figures
+p img, figure img, .figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@media only screen and (max-width: $screen-xs-max) {
+  .width-500 {
+    float: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+// On very small devices, put all pictures that are larger than 300px and >50pct on the left.
+@media only screen and (max-width: $screen-xxs-max) {
+  .width-300,
+  .img-50pct,
+  .img-60pct,
+  .img-75pct {
+    float: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .width-50pct {
+    width: 100%;
+  }
+}
+
+// Icon on a link (that is inside a figure)
+// On a picture, an icon appears when adding a class to a link starting with "glyphicon-*" (from Bootstrap icons list)
+
+figure {
+  a[class^='glyphicon-']:before,
+  a[class*=' glyphicon-']:before {
+    @extend .glyphicon;
+    @extend .glyphicon-action;
+    font-family: 'Glyphicons Halflings';
+    opacity: .5;
+    @include transition(all .2s ease);
+    z-index: 1;
+  }
+
+  a:hover[class^='glyphicon-']:before,
+  a:hover[class*=' glyphicon-']:before {
+    opacity: 1;
+    font-size: 56px;
+    @include transition(all .2s ease);
+  }
+
+  a:hover[class^='glyphicon-'],
+  a:hover[class*=' glyphicon-'] {
+    text-decoration: none;
+  }
+
+  a[class^='glyphicon-'],
+  a[class*=' glyphicon-'] {
+    position: relative;
+    display: block;
+    height: 100%;
+  }
+
+  // Big glyphicon on a figure for an action (like play movie, zoom, etc)
+  .glyphicon.glyphicon-action {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: #FFF;
+    text-shadow: 0 0 4px #999999;
+  }
+}
+
+// -----------------------
+// Figures
+// -----------------------
+
+// the following styles are working well for all browsers except IE
+// In IE, the style 'display: table;' conflicts with the 'max-width:100%;' applied to all (responsive) images.
+/*
+figure, .figure {
+  display: table;
+  figcaption {
+    display: table-caption;
+    caption-side: bottom;
+  }
+}
+*/
+
+figure, .figure {
+  //margin-bottom: 1.2em;
+  position: relative;
+
+  // For Jahia (Jahia puts a .image class in ckeditor when caption text)
+  &.image {
+    margin-bottom: 1.2em;
+  }
+
+  &.width-100pct {
+    margin: 0 0 1.2em 0;
+  }
+
+  &.pull-right {
+    margin: 0 0 1.2em 2em;
+  }
+
+  figcaption {
+    max-width: 100%;
+    padding-top: 5px;
+    font-size: $font-size-small;
+    line-height: 1.3em;
+  }
+
+  .copyright, .info {
+    position: absolute;
+    color: darken($gray-lighter, 5%);
+    font-size: $font-size-base*0.7;
+    z-index: 1;
+    padding: 4px 6px 1px 6px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    > p {
+      margin-bottom: 0;
+    }
+
+    a {
+      color: #FFF;
+      text-decoration: underline;
+      &:hover {
+        cursor: hand;
+      }
+    }
+  }
+
+  .copyright {
+    top: 0;
+    right: 0;
+    text-align: right;
+    border-bottom-left-radius: 4px;
+  }
+
+  &.frame {
+    .copyright {
+      top: 5px;
+      right: 5px;
+    }
+  }
+
+  .info {
+    top: 0;
+    left: 0;
+    border-radius: 4px;
+    margin: 8px;
+
+    &.pull-right {
+      left: inherit;
+      right: 0;
+    }
+  }
+
+  .img-container {
+    position: relative;
+
+    .info {
+      bottom: 0;
+      top: inherit;
+      left: 0;
+      border-radius: 0;
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  // Effect on a:hover on an image
+  a {
+    .glyphicon.glyphicon-action {
+      opacity: .5;
+      @include transition(opacity .2s ease);
+    }
+  }
+
+  a:hover {
+    img {
+      opacity: 0.8;
+    }
+
+    .glyphicon.glyphicon-action {
+      opacity: 1;
+      font-size: 56px;
+      @include transition(all .2s ease);
+    }
+  }
+
+  // box-icon adds a small icon on the bottom-left of a figure
+  .box-icon {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+
+    // TODO: remove onlinecollection style and prefer the glyphicon solution (with glyphicon-globe)
+    &.onlinecollection-icon {
+      @include img-retina("assets/img/iso/onlinecollection_icon.png", "assets/img/iso/onlinecollection_icon-hd.png", 24px, 24px);
+    }
+  }
+}
+
+
+// -----------------------
+// MEDIA
+// -----------------------
+
+.media {
+  .align-left {
+    margin-right: $box-padding;
+  }
+}
+
+// -----------------------
+/* RIBBON */
+// -----------------------
+
+.ribbon-wrapper {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  z-index: 5;
+
+  .ribbon {
+    position: relative;
+    font: bold 15px Sans-Serif;
+    color: #333;
+    text-align: center;
+    @include rotate(45deg);
+    padding: 7px 0;
+    left: -6px;
+    top: 15px;
+    width: 120px;
+    @include box-shadow(0px 0px 3px rgba(0, 0, 0, 0.3));
+
+    &.ribbon-primary {
+      @include linear-gradient($start-color: desaturate(lighten($brand-primary, 30%), 35%), $end-color: desaturate(lighten($brand-primary, 10%), 35%));
+      //@include gradient-vertical($start-color: desaturate(lighten($brand-primary, 30%), 35%), $end-color: desaturate(lighten($brand-primary, 10%), 35%), $start-percent: 0%, $end-percent: 100%);
+      text-shadow: rgba(0, 0, 0, 0.3) 0px 0px 1px;
+      color: #FFF;
+    }
+
+    &.ribbon-success {
+      @include linear-gradient($start-color: #BFDC7A, $end-color: #8EBF45);
+      //@include gradient-vertical($start-color: #BFDC7A, $end-color: #8EBF45, $start-percent: 0%, $end-percent: 100%);
+      text-shadow: rgba(192, 192, 192, 0.5) 0 1px 0;
+      color: #6a6340;
+    }
+
+    &.ribbon-info {
+      @include linear-gradient($start-color: desaturate(lighten($brand-info, 20%), 20%), $end-color: desaturate(lighten($brand-info, 0%), 35%));
+      //@include gradient-vertical($start-color: desaturate(lighten($brand-info, 20%), 20%), $end-color: desaturate(lighten($brand-info, 0%), 35%), $start-percent: 0%, $end-percent: 100%);
+      text-shadow: rgba(192, 192, 192, 0.5) 0 1px 0;
+      color: desaturate(darken($brand-info, 20%), 20%);
+    }
+
+    &.ribbon-warning {
+      @include linear-gradient($start-color: desaturate(lighten($brand-warning, 30%), 35%), $end-color: desaturate(lighten($brand-warning, 10%), 35%));
+      //@include gradient-vertical($start-color: desaturate(lighten($brand-warning, 30%), 35%), $end-color: desaturate(lighten($brand-warning, 10%), 35%), $start-percent: 0%, $end-percent: 100%);
+      text-shadow: rgba(192, 192, 192, 0.5) 0 1px 0;
+      color: desaturate(darken($brand-warning, 20%), 20%);
+    }
+
+    &.ribbon-danger {
+      @include linear-gradient($start-color: desaturate(lighten($brand-danger, 30%), 35%), $end-color: desaturate(lighten($brand-danger, 10%), 35%));
+      //@include gradient-vertical($start-color: desaturate(lighten($brand-danger, 30%), 35%), $end-color: desaturate(lighten($brand-danger, 10%), 35%), $start-percent: 0%, $end-percent: 100%);
+      text-shadow: rgba(0, 0, 0, 0.3) 0 0 1px;
+      color: #FFF;
+    }
+
+    &:before,
+    &:after {
+      content: "";
+      border-top: 3px solid #6e8900;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      position: absolute;
+      bottom: -3px;
+    }
+
+    &:before {
+      left: 0;
+    }
+
+    &:after {
+      right: 0;
+    }
+  }
+}
+

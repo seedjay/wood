@@ -1,0 +1,300 @@
+// **************************************************
+// OFF-CANVAS MENU
+// **************************************************
+
+.offcanvas-toggle {
+  display: none;
+}
+
+@media only screen and (max-width: $screen-xs-max) {
+  #offcanvas-menu,
+  .offcanvas-toggle {
+    @include transition(all .25s ease-out);
+  }
+
+  #offcanvas-menu,
+  #offcanvas-menu.collapse {
+    padding: 0;
+    width: 80%;
+  }
+
+  #offcanvas-menu {
+    position: fixed;
+    //z-index: 200;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0) 97%, rgba(0, 0, 0, 0.2)), lighten($gray-dark, 3%);
+    right: 0;
+    top: 0;
+    height: 100%;
+    overflow-y: scroll;
+    margin: 0;
+
+    &.collapse {
+      display: block;
+      right: -80%;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 34px;
+    }
+
+    // initialize values
+    ul,
+    .navbar-nav,
+    a,
+    .divider,
+    li,
+    a {
+      background: none;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      display: block;
+      width: 100%;
+      position: relative;
+
+      a {
+        padding: 15px 25px;
+        white-space: nowrap;
+
+      }
+    }
+
+    .navbar-form {
+      position: relative;
+      bottom: auto;
+      border: none;
+      @include box-shadow(none);
+      margin: 3px 10px;
+      right: initial;
+    }
+
+    &.nav-2levels,
+    &.nav-3levels {
+      padding-top: 37px;
+      border-top: none;
+
+      li > a {
+        height: auto !important;
+      }
+
+      ul {
+        position: relative;
+        width: 100%;
+
+        & > li {
+          display: block;
+          background: rgba(255, 255, 255, 0.12);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+          &.hasChildren:hover > .dropdown-menu,
+          &.hasChildren:hover > .navbar-nav,
+          &.hasChildren.active > .dropdown-menu {
+            display: none;
+          }
+
+          &.hasChildren.open > .dropdown-menu,
+          &.hasChildren.open > .nav-panel {
+            display: block;
+          }
+
+          // hide the extra caret just after the li
+          &.hasChildren > a:after {
+            display: none;
+          }
+
+          & > a {
+            padding-right: 50px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            bottom: 0;
+
+            // TODO: Add vertical line to separate button from link
+            .offcanvas-dropdown-btn {
+              width: 50px;
+              height: 50px;
+              position: absolute;
+              right: 0;
+              margin-top: -15px;
+              font-size: 24px;
+              padding-top: 16px;
+              padding-left: 19px;
+              z-index: 50;
+              // the two lines below to highlight the dropdown button (clearer but not beautiful)
+              //border-left: 1px solid rgba(0, 0, 0, 0.2);
+              //background: rgba(255, 255, 255, 0.12);
+
+              .caretIcon {
+                @include transition(transform 0.25s ease-in-out);
+                position: absolute;
+              }
+            }
+          }
+
+          &.dropdown.active,
+          &.active {
+            & > a {
+              color: #FFF;
+
+              &.current {
+                color: #FFF;
+              }
+
+              .offcanvas-dropdown-btn {
+                color: #CCC;
+              }
+            }
+          }
+
+          &.open {
+            & > a {
+              .offcanvas-dropdown-btn {
+                .caretIcon {
+                  -ms-transform: rotate(90deg); /* IE 9 */
+                  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+                  transform: rotate(90deg);
+                }
+              }
+            }
+          }
+
+          & > .dropdown-menu {
+            & > li {
+              & > a {
+                padding-left: 50px;
+              }
+            }
+
+            & ul > li {
+              & > a {
+                padding-left: 75px;
+              }
+
+              & ul > li {
+                & > a {
+                  padding-left: 100px;
+                }
+
+                & ul > li {
+                  a {
+                    padding-left: 125px;
+                  }
+
+                  & ul > li > a {
+                    padding-left: 150px;
+                  }
+                }
+              }
+            }
+
+            &.nav-panel {
+              margin: 0;
+              padding: 0;
+              top: 0;
+              position: relative;
+              border: none;
+
+              .panel-image {
+                display: none;
+              }
+
+              .panel-teaser {
+                display: none;
+              }
+
+              & > ul.navbar-nav {
+                display: block;
+              }
+            }
+          }
+
+          a {
+            color: #ccc;
+            text-align: left;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+
+      // for nav-panel at level2
+      & > .nav-level1 {
+        & > .hasChildren > .dropdown-menu.nav-panel {
+          & > ul.navbar-nav {
+            & > li {
+              & > a {
+                padding-left: 50px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Push the interface on the left
+  body > *:not(#offcanvas-menu):not(script) {
+    @include transition(margin .25s ease-out);
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .offcanvas-active {
+    margin-left: -80% !important;
+    margin-right: 80% !important;
+
+    // under .topbar-content, ul with .offcanvas-menu appear in the offcanvas (top-right)
+    .topbar .topbar-content {
+      ul.offcanvas-menu {
+        display: initial;
+        position: fixed;
+        right: 5px;
+        top: 4px;
+
+        > li,
+        > li > a,
+        > li > a:hover {
+          color: darken($gray-lighter, 3%);
+        }
+      }
+    }
+  }
+
+  // Offcanvas toggle
+  .offcanvas-toggle {
+    display: block;
+    position: fixed;
+    z-index: 8;
+    top: 50px;
+    right: 10px;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 23px;
+    background: #3b3b3b;
+    color: #fff;
+    outline: none;
+    opacity: 0.4;
+
+    span {
+      font-size: 32px;
+      position: absolute;
+      left: 11px;
+      top: 4px;
+    }
+
+    &.active {
+      right: 80%;
+      margin-right: 10px;
+    }
+  }
+}

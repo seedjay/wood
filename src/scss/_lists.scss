@@ -1,0 +1,511 @@
+@charset "UTF-8";
+// *************************************************************
+// LISTS
+// *************************************************************
+//
+// -------------------------
+// refine list
+// verticaline list
+// list-box list
+// list step
+// list-zebra
+// fit-to-box
+// description
+// list-inline
+// -------------------------
+
+
+ul,
+ol {
+  //list-style-position: inside; // Better when image floats on left of a list
+  padding-left: 15px;
+}
+
+// in articles, list with bullets (that allows a image floating left)
+.entry-content ul:not([class]) {
+  list-style: none;
+  position: relative;
+  padding-left: 0;
+  margin-left: 0;
+  left: 15px;
+  li {
+    padding-left: 0;
+    margin-left: 0;
+    text-indent: -11px;
+    &:before {
+      font-weight: bold;
+      content: '·\00a0\00a0';
+      color: $text-color;
+    }
+  }
+}
+
+
+// -------------------------
+// refine list
+// -------------------------
+
+ul.refine,
+.refine ul {
+  padding-left: 0;
+  list-style-type: none;
+  > li {
+    padding-bottom: 8px;
+    border-bottom: 1px solid $gray-lighter;
+    padding-top: 10px;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .hentry,
+    .media {
+      padding-top: 0;
+      padding-bottom:0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+// -------------------------
+// verticaline list
+// -------------------------
+
+ul.verticaline {
+  & > li {
+    background-image: url("assets/img/iso/divider.png");
+    background-repeat: no-repeat;
+    background-position: left 50%;
+    display: inline-block;
+    margin-right: -1px;
+
+    &:first-child {
+      background: none;
+    }
+  }
+
+  &.verticaline-dark > li {
+    background-image: url("assets/img/iso/divider-dark.png");
+
+    &:first-child {
+      background: none;
+    }
+  }
+
+  &.verticaline-light > li {
+    background-image: url("assets/img/iso/divider-light.png");
+
+    &:first-child {
+      background: none;
+    }
+  }
+  &.list-inline > li {
+    padding: 10px 15px 10px 15px;
+  }
+}
+
+/* Color themes */
+.theme-red {
+  ul.verticaline {
+    > li.active,
+    li.active > a,
+    li > a.active {
+      color: $iso-red;
+    }
+  }
+}
+
+
+
+// -------------------------
+// list-box list
+// -------------------------
+
+.list-box {
+  padding-left: 0;
+  li {
+    list-style: none;
+    position: relative;
+
+    .arrow {
+      position: absolute;
+      top: 12px;
+      right: 10px;
+      color: #dadada;
+    }
+  }
+
+  & > li.active > a {
+    border: 1px solid lighten($gray-lighter, 1%);
+    background-color: lighten($gray-lighter, 4%);
+    border-left: 1px solid darken($gray-lighter, 5%);
+  }
+
+  a.list-group-item {
+    border: 1px solid lighten($gray-lighter, 1%);
+    border-radius: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 30px;
+    color: lighten($gray-light, 15%);
+    margin-bottom: -1px;
+
+    &:hover .list-group-item-text {
+      color: lighten($gray-light, 15%);
+    }
+
+    p {
+      color: lighten($gray-light, 15%);
+    }
+
+    &:hover {
+      background-color: lighten($gray-lighter, 4%);
+      border-left: 1px solid lighten($gray-light, 30%);
+
+      a {
+        color: $iso-red;
+      }
+    }
+
+    &.active {
+      background-color: lighten($gray-lighter, 5%);
+      border: 1px solid lighten($gray-lighter, 1%);
+    }
+  }
+  ul {
+    margin-left: -15px;
+    & > li > a {
+      padding-left: 30px;
+    }
+  }
+}
+
+// Mixin that defines color theme
+@mixin list-box-color($color) {
+  ul.list-box {
+    // Styles applied only on first level active <li>
+    > li.active {
+      border-left: 1px solid $color;
+    }
+    // Styles applied on all active <li>
+    li.active {
+      // Styles applied only on first level <a> under active <li>
+      // and on each .list-group-item-heading under active <li>
+      > a,
+      .list-group-item-heading {
+        color: $color;
+      }
+      // Styles applied to each <a> under active <li>
+      a {
+        border-left: 0;
+      }
+    }
+
+    a.list-group-item {
+      &:hover .list-group-item-heading,
+      &:hover a {
+        color: $color;
+      }
+
+      &.active {
+        color: $color;
+        border-left: 1px solid $color;
+
+        .list-group-item-heading {
+          color: $color;
+        }
+      }
+    }
+  }
+}
+
+/* Color themes */
+.theme-red {
+  @include list-box-color($iso-red);
+}
+
+.theme-blue {
+  @include list-box-color($iso-blue);
+}
+
+.panel-group {
+  .list-box {
+    li a {
+      border-left: none;
+      border-right: none;
+    }
+    li a.list-group-item:hover {
+      border-left: none;
+    }
+  }
+}
+
+
+// -------------------------
+// list steps
+// -------------------------
+
+ul.steps {
+  padding-left: 0;
+  & > li {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    border: 1px solid lightgray;
+    padding: 10px 40px 10px 10px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+
+    &.step {
+      margin-left: 20px;
+
+      &:before {
+        content: ">";
+        position: absolute;
+        top: 7px;
+        left: -19px;
+        font-size: 36px;
+        font-weight: 500;
+      }
+
+      // alert-bind binds a step with the next li.alert (that does not have a .step)
+      @media only screen and (min-width: $screen-sm-min) {
+        &.alert-bind {
+          border-radius: 4px 0 0 4px;
+        }
+        &.alert-bind+li.alert {
+          border-radius: 0 4px 4px 0;
+          margin-left: -5px;
+        }
+      }
+    }
+
+    &.active {
+      border-width: 2px;
+    }
+    &:not(.active) {
+      margin-top: 1px;
+    }
+
+    &.alert-info {
+      border-color: $state-info-border;
+      &.active {
+        border-color: $state-info-text;
+      }
+    }
+    &.alert-warning {
+      border-color: $state-warning-border;
+      &.active {
+        border-color: $state-warning-text;
+      }
+    }
+    &.alert-danger {
+      border-color: $state-danger-border;
+      &.active {
+        border-color: $state-danger-text;
+      }
+    }
+    &.alert-success {
+      border-color: $state-success-border;
+      &.active {
+        border-color: $state-success-text;
+      }
+    }
+
+    @media only screen and (max-width: $screen-xxs-max) {
+      display: block;
+      &.step {
+        margin-left: 0;
+        margin-top: 20px;
+        &:before {
+          content: ">";
+          position: absolute;
+          top: -40px;
+          left: 48%;
+          -ms-transform: rotate(90deg); /* IE 9 */
+          -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+          transform: rotate(90deg);
+          font-size: 36px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .step-date {
+      font-size: x-small;
+      position: absolute;
+      margin-top: 15px;
+    }
+  }
+}
+
+
+// -------------------------
+// fit-to-box
+// -------------------------
+
+// when inside a box, .fit-to-box expands the width to the full size of the box
+ul.fit-to-box {
+  margin-left: -($box-padding+1);
+  margin-right: -($box-padding);
+
+  // for lists
+  > li {
+    padding-left: $box-padding+1;
+    padding-right: $box-padding;
+  }
+
+  &.list-box {
+    & > li {
+      padding-left: 0;
+      padding-right: 0;
+
+      ul > li {
+        &.active {
+          & > a {
+            background-color: lighten($gray-lighter, 4%);
+          }
+        }
+        & > a {
+          padding-left: $box-padding*2;
+        }
+      }
+    }
+    a {
+      padding-left: $box-padding+1;
+      padding-right: $box-padding;
+      border-right: none !important;
+    }
+  }
+}
+
+.fit-to-box {
+  margin-left: -($box-padding+1);
+  margin-right: -($box-padding+1);
+  // for tables
+  table {
+    td:first-child {
+      padding-left: $box-padding+1;
+    }
+    td:last-child {
+      padding-right: $box-padding+1;
+    }
+  }
+}
+
+
+// -------------------------
+// List-zebra
+// -------------------------
+
+ul.list-zebra {
+  li:nth-child(even) a {
+    background-color: #fff;
+  }
+  li:nth-child(odd) a {
+    background-color: lighten($gray-lighter, 5%);
+  }
+}
+
+// -------------------------
+// Description list
+// -------------------------
+
+dl.dl-inline {
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+  dt {
+    display: inline-block;
+    font-weight: normal;
+    margin-right: 2px;
+  }
+
+  dd {
+    display: inline;
+    &:after {
+      content: " | ";
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+  }
+
+  .label {
+    font-size: 100%;
+  }
+}
+
+// Hastags are separated by a dot and have a # at the right of the keyword
+.entry-hashtags {
+  dl.dl-inline {
+    dd {
+      padding-right: 3px;
+
+      &:before {
+        content: "#";
+        color: lighten($link-color, 10%);
+      }
+
+      &:after {
+        content: " \00b7";
+      }
+
+      &:last-child:after {
+        content: "";
+      }
+    }
+  }
+}
+
+
+// -------------------------
+// Media list
+// -------------------------
+
+.media-list {
+  .media {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1.2em;
+    padding-bottom: 1.2em;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+
+.media-left,
+.media > .pull-left {
+  padding-right: 1.2em;
+  @media only screen and (min-width: $screen-xs-min) {
+    //padding-bottom: 1.2em;
+  }
+}
+.media > .pull-right {
+  padding-left: 1.2em;
+  @media only screen and (min-width: $screen-xs-min) {
+    //padding-bottom: 1.2em;
+  }
+}
+
+.media-body {
+  .entry-description {
+    margin-right: 0;
+  }
+
+  @media only screen and (max-width: $screen-xxs-max) {
+    clear: both;
+    display: block;
+    width: 100%;
+    margin-top: 1.2em;
+  }
+}
+
+
+
+

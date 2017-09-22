@@ -1,0 +1,40 @@
+// **************************************************
+// ISO MIXINS 
+// **************************************************
+// 
+// --------------
+// btn
+// linear-gradient
+// --------------
+
+
+// ---------
+// btn
+// ---------
+
+@mixin btn-hover-focus-active($type, $bg-color, $bd-color) {
+    .btn-#{$type}:hover,
+    .btn-#{$type}:focus,
+    .btn-#{$type}:active,
+    .btn-#{$type}.active,
+    .open .dropdown-toggle.btn-#{$type} {
+        background-color: darken($bg-color, 5%);
+        border-color: darken($bd-color, 10%);
+    }
+}
+
+
+// -----------------
+// linear-gradient
+// -----------------
+
+// for ribbon, We do not use bootstrap mixin because 'gradient-vertical' and 'rotate' mixins does not work together in IE9
+@mixin linear-gradient($start-color, $end-color) {
+    background-color: $start-color;
+    background-image: -webkit-gradient(linear, left top, left bottom, from($start-color), to($end-color));
+    background-image: -webkit-linear-gradient(top, $start-color, $end-color);
+    background-image: -moz-linear-gradient(top, $start-color, $end-color);
+    background-image: -ms-linear-gradient(top, $start-color, $end-color);
+    background-image: -o-linear-gradient(top, $start-color, $end-color);
+}
+

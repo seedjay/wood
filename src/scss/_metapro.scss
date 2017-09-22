@@ -1,0 +1,55 @@
+$metapro-font-path: "assets/fonts/iso/metapro/";
+
+// Todo: Fix fonts in IE9...
+
+/* ISO FONT: metaPro */
+body {
+  font-family: 'MetaWebPro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+@font-face {
+  font-family: 'MetaWebPro';
+  src: url('#{$metapro-font-path}MetaWebPro-Normal.eot');
+  src: url('#{$metapro-font-path}MetaWebPro-Normal.eot?#iefix') format('embedded-opentype'),
+       url('#{$metapro-font-path}MetaWebPro-Normal.woff') format('woff'),
+       url('#{$metapro-font-path}MetaCompPro-Normal.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MetaWebPro';
+  src: url('#{$metapro-font-path}MetaWebPro-Thin.eot');
+  src: url('#{$metapro-font-path}MetaWebPro-Thin.eot?#iefix') format('embedded-opentype'),
+       url('#{$metapro-font-path}MetaWebPro-Thin.woff') format('woff'),
+       url('#{$metapro-font-path}MetaCompPro-Thin.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MetaWebPro';
+  src: url('#{$metapro-font-path}MetaWebPro-NormalIta.eot');
+  src: url('#{$metapro-font-path}MetaWebPro-NormalIta.eot?#iefix') format('embedded-opentype'),
+       url('#{$metapro-font-path}MetaWebPro-NormalIta.woff') format('woff'),
+       url('#{$metapro-font-path}MetaCompPro-NormalIta.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MetaWebPro';
+  src: url('#{$metapro-font-path}MetaWebPro-Bold.eot');
+  src: url('#{$metapro-font-path}MetaWebPro-Bold.eot?#iefix') format('embedded-opentype'),
+       url('#{$metapro-font-path}MetaWebPro-Bold.woff') format('woff'),
+       url('#{$metapro-font-path}MetaCompPro-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.modal.fancybox .modal-body button span {
+  top: -1px;
+  left: 5px;
+  font-size:20px;
+}

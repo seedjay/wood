@@ -1,0 +1,110 @@
+// **************************************************
+// TEMPLATES, MAIN STYLES
+// **************************************************
+
+header.container,
+footer.container {
+  @include box-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+}
+
+.main.container.topbar-above {
+  padding-top: 2px;
+}
+// When level1 is open, level2 takes 53px height (than we need to add to the padding-top:30px existing already)
+@media only screen and (min-width: $screen-sm-min) {
+  .main.container.level1-open-above {
+    padding-top: 83px;
+  }
+}
+
+.main.container {
+  background-color: #fff;
+  padding: 30px;
+  margin-bottom: 15px;
+  @include box-shadow(0 0px 3px rgba(0, 0, 0, 0.3));
+}
+
+.top-md-push-2 {
+  margin-top: -$grid-gutter-width*2;
+}
+
+.top-md-push-3 {
+  margin-top: -$grid-gutter-width*3;
+}
+
+.top-md-push-4 {
+  margin-top: -$grid-gutter-width*4;
+}
+
+.top-md-push-2,
+.top-md-push-3,
+.top-md-push-4 {
+  @media only screen and (max-width: $screen-sm-max) {
+    margin-top: inherit;
+  }
+  @media print {
+    margin-top: 0;
+  }
+}
+
+// ---------------------------
+// subject (background image)
+// ---------------------------
+
+.main.container.subject {
+  margin-bottom: 0;
+}
+
+.subject {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  @media only screen and (max-device-width: 1024px) {
+    /**
+    * Hack as "background-attachment: fixed;" has been disabled from mobile browsers.
+    * Fixed-backgrounds have huge repaint cost..
+    * Targets major devices (iPhones, iPads etc...) except laptops...
+    */
+    background-attachment: scroll;
+  }
+}
+
+.subject .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+// Add space between columns when small devices
+@media only screen and (max-width: $screen-sm-max) {
+  [class^="col-md-"] {
+    padding-top: 15px;
+  }
+
+  // A section title that is in a col-12 should not be separated a col-7 + col-3
+  .col-md-12 + [class^="col-md-"] {
+    padding-top: 0;
+  }
+}
+
+@media only screen and (max-width: $screen-xxs-max) {
+  .hidden-xxs {
+    display: none;
+  }
+}
+
+
+
+
+
+

@@ -1,0 +1,656 @@
+// **************************************************
+// BOXES
+// **************************************************
+//
+// -----------------------
+// All boxes
+// well
+// emphasis
+// highlight-box
+// box .glyphicon-*
+// box-icon
+// box color
+// Alerts (sections within a box)
+// vCard
+// Pub
+// store-box
+// -----------------------
+
+
+// --------------------
+// All boxes
+// --------------------
+
+.well,
+.highlight-box,
+.emphasis,
+.vcard,
+.publication,
+.isobox {
+  margin-bottom: 1.2em;
+
+  // when inside theses boxes, publications or vcards have no margin-bottom
+  > .publication:last-child,
+  > .vcard:last-child,
+  > .article.hentry:last-child,
+  > .emphasis:last-child,
+  > .alert:last-child {
+    margin-bottom: 0;
+    @include border-bottom-radius(4px);
+  }
+  .box-last {
+    margin-bottom: -10px;
+  }
+}
+
+
+// --------------------
+// well
+// --------------------
+
+// default ISO well class is lighter than highlight-box
+.well {
+  background-color: lighten($gray-lighter, 5.5%);
+  border: 1px solid $gray-lighter;
+  position: relative;
+  padding: $box-padding $box-padding $box-padding/2;
+  z-index: 5;
+  @media print {
+    background-color: lighten($gray-lighter, 5.5%) !important;
+  }
+}
+
+// well and highlight-box is white when inside a row-light, row-lighter or row-gray
+.row.row-gray,
+.row.row-light,
+.row.row-lighter {
+  .well,
+  .highlight-box,
+  [class^='emphasis-'] {
+    background-color: #FFF;
+  }
+}
+
+// well and highlight-box can be 'cut' by a row.row-middle.row-color
+.well,
+.highlight-box {
+  .row.row-middle {
+    margin-top: $box-padding;
+    margin-bottom: $box-padding;
+  }
+}
+
+
+// -----------------
+// EMPHASIS
+// -----------------
+
+@mixin emphasis($color) {
+  border-top: 2px solid $color !important;
+  border-bottom: 2px solid $color !important;
+  padding: $box-padding $box-padding $box-padding/2;
+  position: relative;
+  margin-bottom: 1.2em;
+
+  &.well,
+  &.highlight-box {
+    border-left: transparent !important;
+    border-right: transparent !important;
+    border-radius: 0 !important;
+  }
+
+  > .alert {
+    border-radius: 0 !important;
+  }
+
+  // Adds the border radius if .circle
+  &.circle {
+    @include border-top-radius(50% !important);
+    @include border-bottom-radius(50% !important);
+    @include border-left-radius(50% !important);
+    @include border-right-radius(50% !important);
+    border-left: 2px solid $color !important;
+    border-right: 2px solid $color !important;
+  }
+}
+
+.emphasis-lightgray {
+  @include emphasis($gray-lighter);
+}
+
+.emphasis-gray {
+  @include emphasis($gray-light);
+}
+
+.emphasis-primary {
+  @include emphasis($brand-primary);
+}
+
+.emphasis-info {
+  @include emphasis($brand-info);
+}
+
+.emphasis-success {
+  @include emphasis($brand-success);
+}
+
+.emphasis-warning {
+  @include emphasis($brand-warning);
+}
+
+.emphasis-danger {
+  @include emphasis($brand-danger);
+}
+
+// -----------------------
+// HIGHLIGHT-BOX
+// -----------------------
+
+.highlight-box {
+  background-color: lighten($gray-lighter, 3.5%);
+  border: 1px solid lighten($gray-lighter, 1%);
+  position: relative;
+  z-index: 5;
+  border-radius: 4px;
+  @extend .shadow-light;
+
+  // For Jahia
+  &.isobox {
+    padding: $box-padding;
+  }
+
+  .box-title {
+    margin-top: 0;
+  }
+
+  & > .publication,
+  & > .vcard,
+  & > .box-text {
+    padding: $box-padding $box-padding $box-padding/2;
+    margin-bottom: 10px;
+  }
+
+  &.isobox > .publication,
+  &.isobox > .vcard,
+  &.isobox > .box-text {
+    padding: 0;
+    margin-bottom: 0;
+  }
+  &.isobox > .btn {
+    margin-left: 0;
+  }
+
+  /* IMG-LEFT: Highlight-box with image on the left (by default) */
+  .img-left {
+    padding: 0;
+    width: 30%;
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 100%;
+    text-align: center;
+    display: block;
+    border-radius: 4px 0 0 4px;
+
+    img {
+      height: 100%;
+      min-width: 100%;
+      position: relative; /* allows repositioning */
+      left: 50%; /* move the whole width of the image to the right */
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      width: inherit;
+      max-width: inherit;
+    }
+
+    @media only screen and (max-width: $screen-xxs-max) {
+      float: left;
+      width: 100%;
+      position: relative;
+      margin-bottom: 2em;
+      border-radius: 4px 4px 0 0;
+
+      img {
+        width: 100%;
+        height: auto;
+        transform: none;
+        -webkit-transform: none;
+        -ms-transform: none;
+        left: 0;
+      }
+    }
+
+    & + .box-text {
+      float: right;
+      width: 70%;
+      min-height: 206.391px;
+
+      @media only screen and (max-width: $screen-xxs-max) {
+        float: none;
+        width: 100%;
+      }
+    }
+  }
+
+  /* IMG-RIGHT: Highlight-box with image on the right */
+  .img-right {
+    @extend .img-left;
+    float: right;
+    right: 0;
+    left: inherit;
+    margin: 0 0 1.2em 2em;
+    border-radius: 0 4px 4px 0;
+
+    @media only screen and (max-width: $screen-xxs-max) {
+      margin: 0;
+      border-radius: 4px 4px 0 0;
+    }
+
+    & + .box-text {
+      float: left;
+    }
+  }
+
+  // Highlight-box with image on the top (or bottom)
+  .img-top {
+    padding: 0;
+    margin-bottom: 0;
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: block;
+    img {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+  }
+
+  .img-bottom {
+    margin-bottom: 0;
+    img {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .box-text {
+    &.img-after {
+      width:70%;
+      margin: 0;
+      float: left;
+      @media only screen and (max-width: $screen-xxs-max) {
+        width:100%;
+      }
+    }
+  }
+}
+
+// left-box in col-md-8 or higher: set min-height higher to avoid image deformation
+@media only screen and (min-width: $screen-md-min) {
+  .col-md-8 > .highlight-box > .img-left + .box-text {
+    min-height: 218.391px;
+  }
+
+  .col-md-9 > .highlight-box > .img-left + .box-text {
+    min-height: 246.391px;
+  }
+
+  .col-md-10 > .highlight-box > .img-left + .box-text {
+    min-height: 275.391px;
+  }
+
+  .col-md-11 > .highlight-box > .img-left + .box-text {
+    min-height: 303.891px;
+  }
+
+  .col-md-12 > .highlight-box > .img-left + .box-text {
+    min-height: 332.391px;
+  }
+}
+
+// -----------------
+// box .glyphicon-
+// -----------------
+
+div[class^='glyphicon-'],
+div[class*=' glyphicon-'] {
+  overflow: hidden;
+}
+
+div[class^='glyphicon-']:before,
+div[class*=' glyphicon-']:before {
+  font-family: 'Glyphicons Halflings';
+  font-size: 700%;
+  opacity: .07;
+  position: absolute;
+  right: -3%;
+  top: -10px;
+  display: block;
+  transform: rotate(-7deg);
+}
+
+
+// ----------------------------------
+// box-icon (with .glyphicon- inside)
+// ----------------------------------
+
+.box-icon[class^='glyphicon-']:before,
+.box-icon[class*=' glyphicon-']:before {
+  font-style: normal;
+  font-family: 'Glyphicons Halflings';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  font-size: 16px;
+  padding-top: 2px;
+  padding-left: 0.5px;
+}
+
+.box-icon {
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+}
+
+
+// ---------------------
+// color box
+// ---------------------
+
+@mixin box-color($color) {
+  background-color: $color;
+  border: none;
+  color: #FFFFFF;
+  a {
+    color: lighten($color, 30%);
+  }
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+    a:hover,
+    a:visited,
+    a:focus {
+      border-bottom: 1px solid lighten($color, 30%);
+    }
+  }
+}
+
+.color-white {
+  background-color: #FFF;
+}
+
+.color-primary {
+  @include box-color($brand-primary);
+}
+
+.color-success {
+  @include box-color($brand-success);
+}
+
+.color-info {
+  @include box-color($brand-info);
+}
+
+.color-warning {
+  @include box-color($brand-warning);
+}
+
+.color-danger {
+  @include box-color($brand-danger);
+}
+
+.color-lightgray {
+  background-color: $gray-lighter;
+  color: $text-color;
+}
+
+.color-gray {
+  @include box-color(gray);
+}
+
+.color-black {
+  color: #FFF;
+  border: none;
+  background-color: #000;
+}
+
+.color-transparent {
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+    a:hover,
+    a:visited,
+    a:focus {
+      border-bottom: 1px solid #FFF;
+    }
+  }
+}
+
+
+// ------------------------------------------------
+// Alerts inside a box (highlighted sections)
+// ------------------------------------------------
+
+.alert-gray {
+  background-color: lighten($gray-lighter, 1%);
+  border: 1px solid lighten($gray-lighter, 0%);
+  .refine > li {
+    border-bottom: 1px solid
+  }
+}
+
+.alert-white {
+  background-color: #FFF;
+  border: 1px solid lighten($gray-lighter, 1%);
+}
+
+// refine color inside alert-*
+.alert-gray { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($gray-lighter, 5%); } }
+.alert-info { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($alert-info-bg, 5%); } }
+.alert-success { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($alert-success-bg, 5%); } }
+.alert-warning { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($alert-warning-bg, 6%); } }
+.alert-danger { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($alert-danger-bg, 5%); } }
+
+// refine color inside row-*
+.row-gray { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($gray-lighter, 5%); } }
+.row-primary { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($brand-primary, 5%); } }
+.row-info { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($alert-info-bg, 5%); } }
+.row-success { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($alert-success-bg, 5%); } }
+.row-warning { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($alert-warning-bg, 6%); } }
+.row-danger { ul.refine > li, .refine ul>li { border-bottom: 1px solid darken($alert-danger-bg, 5%); } }
+
+.highlight-box > .box-text,
+.highlight-box.isobox,
+.well {
+  > .alert {
+    padding: $box-padding;
+    margin-left: -$box-padding;
+    margin-right: -$box-padding;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    &:last-child {
+      margin-top: $box-padding;
+      margin-bottom: -$box-padding;
+      @include border-bottom-radius(4px);
+    }
+    &:first-child {
+      margin-top: -$box-padding;
+      @include border-top-radius(4px);
+    }
+    > p,
+    > ul {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.highlight-box {
+  & > .alert {
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    padding: $box-padding;
+
+    & > p,
+    & > ul {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+
+
+// -----------------------
+// VCARDS & PUB
+// -----------------------
+
+.publication,
+.vcard {
+  .figure-box {
+    padding-right: $box-padding;
+    float: left;
+    width: 33%;
+
+    figure {
+      margin: 0;
+      width: 100%; // for IE8
+
+      @media only screen and (max-width: $screen-xxs-max) {
+        margin-bottom: 1em;
+      }
+    }
+  }
+
+  .content-box {
+    margin-left: 33%;
+
+    // TODO: add .no-image class when no image in JAHIA
+    &.no-image {
+      margin-left: 0;
+    }
+
+    h3 {
+      margin-top: 0;
+    }
+
+    // to trunk the following divs with '...' when they overflow the container
+    .email, .url {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  hr {
+    width: 50%;
+    margin: 8px 50% 8px 0;
+    border-top-color: $gray-lighter;
+  }
+}
+
+// VCARDS only
+.vcard {
+  .figure-box {
+    figure {
+      img, figcaption {
+        text-align: center;
+      }
+    }
+  }
+
+  .content-box {
+    .fn {
+      font-size: 18px;
+    }
+
+    .role {
+      font-style: italic;
+    }
+
+    .org {
+      font-variant: small-caps;
+    }
+  }
+}
+
+
+// ---------------------
+// store-box
+// ---------------------
+
+div.store-box[class^='glyphicon-'],
+div.store-box[class*=' glyphicon-'] {
+  &:before {
+    z-index: 1;
+    right: 0%;
+  }
+}
+
+.store-box {
+  overflow: visible !important;
+  table.orderProduct {
+    position: relative;
+    z-index: 5;
+    border-bottom: 1px solid #e9e9e9;
+    border-collapse: separate;
+    tbody {
+      tr {
+        td {
+          cursor: pointer;
+          color: $gray-light;
+        }
+
+        &.active {
+          td {
+            color: $text-color;
+            &.selection {
+              width: 20px;
+              border-left: 2px solid $brand-primary;
+              &:before {
+                content: "";
+              }
+              .chooseFormat {
+                .glyphicon {
+                  font-size: 26px;
+                  color: $brand-primary;
+                  display: block;
+                  line-height: 12px;
+                }
+              }
+            }
+            &:last-child {
+              border-right: 1px solid #e5e5e5;
+            }
+          }
+        }
+        &:hover {
+          background-color: #f5f5f5;
+          td:first-child {
+            border-left: 2px solid #d6d6d6;
+          }
+          td:last-child {
+            border-right: 1px solid #ebebeb;
+          }
+        }
+        &.active:hover {
+          td:first-child {
+            border-left: 2px solid $brand-primary;
+          }
+        }
+      }
+    }
+  }
+  .btn {
+    position: relative;
+    z-index: 5;
+  }
+}
+
+
